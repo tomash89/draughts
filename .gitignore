@@ -1,1 +1,6 @@
 target/
+
+/draughts-game/.classpath
+/draughts-game/.project
+/draughts-game/.settings/org.eclipse.jdt.core.prefs
+/draughts-game/.settings/org.eclipse.m2e.core.prefs
