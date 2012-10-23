@@ -30,4 +30,8 @@ public class DraughtsEngine {
 	public void printChessboard() {
 		System.out.println(this.chessboard);
 	}
+
+	public Chessboard getChessboard() {
+		return chessboard;
+	}
 }

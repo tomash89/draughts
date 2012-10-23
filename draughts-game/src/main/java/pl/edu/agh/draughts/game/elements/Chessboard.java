@@ -108,4 +108,8 @@ public class Chessboard {
 		}
 		return moves;
 	}
+
+	public Piece[][] getChessboardTable() {
+		return this.chessboardTable;
+	}
 }

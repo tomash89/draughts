@@ -40,6 +40,14 @@ public class Move {
 			}
 			chessboard.movePiece(pieceRow, pieceColumn, piece);
 		}
+
+		if ((piece.getPieceColor().equals(PieceColor.WHITE) && pieceRow == Chessboard.CHESSBOARD_SIZE - 1)
+				|| (piece.getPieceColor().equals(PieceColor.BLACK) && pieceRow == 0)) {
+			piece = new King(piece.getPieceColor(), chessboard);
+			chessboard.movePiece(pieceRow, pieceColumn, piece);
+
+			System.out.println("New king!");
+		}
 	}
 
 	public int getMoveLength() {
