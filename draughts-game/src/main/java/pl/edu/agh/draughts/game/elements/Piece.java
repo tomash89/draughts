@@ -1,10 +1,14 @@
 package pl.edu.agh.draughts.game.elements;
 
-public class Piece {
+import java.util.List;
+
+public abstract class Piece {
 
 	protected PieceColor pieceColor;
 
-	public Piece(PieceColor pieceColor) {
+	private Chessboard chessboard;
+
+	public Piece(PieceColor pieceColor, Chessboard chessboard) {
 		super();
 		this.pieceColor = pieceColor;
 	}
@@ -13,4 +17,13 @@ public class Piece {
 		return pieceColor;
 	}
 
+	public Chessboard getChessboard() {
+		return this.chessboard;
+	}
+
+	public abstract List<Move> getValidCaptureMoves(int row, int column,
+			Chessboard chessboard);
+
+	public abstract List<Move> getValidNoCaptureMoves(int row, int column,
+			Chessboard chessboard);
 }

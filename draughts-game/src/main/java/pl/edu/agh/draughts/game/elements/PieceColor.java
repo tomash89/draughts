@@ -2,7 +2,7 @@ package pl.edu.agh.draughts.game.elements;
 
 public enum PieceColor {
 
-	BLACK("x", "X"), WHITE("o", "O");
+	WHITE("o", "O"), BLACK("x", "X");
 
 	private String pawnString;
 	private String kingString;
@@ -20,4 +20,9 @@ public enum PieceColor {
 		return kingString;
 	}
 
+	public boolean isAnotherColor(PieceColor pieceColor) {
+		if (pieceColor == null)
+			return false;
+		return !this.equals(pieceColor);
+	}
 }

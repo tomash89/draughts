@@ -1,8 +1,13 @@
 package pl.edu.agh.draughts.game.elements;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import pl.edu.agh.draughts.game.exceptions.OutOfChessboardException;
+
 public class Chessboard {
 
-	private static final int CHESSBOARD_SIZE = 8;
+	public static final int CHESSBOARD_SIZE = 8;
 
 	private static final int INITIAL_PAWNS__ROWS_COUNT = 3;
 
@@ -21,9 +26,9 @@ public class Chessboard {
 	private void initializeChessboard() {
 		for (int i = 0; i < INITIAL_PAWNS__ROWS_COUNT; i++) {
 			for (int j = i % 2; j < CHESSBOARD_SIZE; j += 2) {
-				chessboardTable[i][j] = new Pawn(PieceColor.WHITE);
+				chessboardTable[i][j] = new Pawn(PieceColor.WHITE, this);
 				chessboardTable[CHESSBOARD_SIZE - i - 1][CHESSBOARD_SIZE - j
-						- 1] = new Pawn(PieceColor.BLACK);
+						- 1] = new Pawn(PieceColor.BLACK, this);
 			}
 		}
 	}
@@ -43,5 +48,64 @@ public class Chessboard {
 			stringBuilder.append("|\n");
 		}
 		return stringBuilder.toString();
+	}
+
+	public PieceColor getPieceColorForField(int row, int column)
+			throws OutOfChessboardException {
+		try {
+			if (this.chessboardTable[row][column] == null) {
+				return null;
+			}
+		} catch (IndexOutOfBoundsException exception) {
+			throw new OutOfChessboardException();
+		}
+		return this.chessboardTable[row][column].getPieceColor();
+	}
+
+	void capture(int row, int column) {
+		this.chessboardTable[row][column] = null;
+	}
+
+	void movePiece(int row, int column, Piece piece) {
+		this.chessboardTable[row][column] = piece;
+	}
+
+	public List<Move> getCaptureMoves(PieceColor pieceColor) {
+		List<Move> captureMoves = new LinkedList<Move>();
+		int maxMoveLength = 0;
+		for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+			for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+				Piece piece = this.chessboardTable[i][j];
+				if (piece != null && piece.getPieceColor().equals(pieceColor)) {
+					List<Move> newCaptureMoves = piece.getValidCaptureMoves(i,
+							j, this);
+					if (!newCaptureMoves.isEmpty()) {
+						int newMoveLength = newCaptureMoves.get(0)
+								.getMoveLength();
+						if (newMoveLength > maxMoveLength) {
+							maxMoveLength = newMoveLength;
+							captureMoves.clear();
+						}
+						if (newMoveLength >= maxMoveLength) {
+							captureMoves.addAll(newCaptureMoves);
+						}
+					}
+				}
+			}
+		}
+		return captureMoves;
+	}
+
+	public List<Move> getNoCaptureMoves(PieceColor pieceColor) {
+		List<Move> moves = new LinkedList<Move>();
+		for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+			for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+				Piece piece = this.chessboardTable[i][j];
+				if (piece != null && piece.getPieceColor().equals(pieceColor)) {
+					moves.addAll(piece.getValidNoCaptureMoves(i, j, this));
+				}
+			}
+		}
+		return moves;
 	}
 }
