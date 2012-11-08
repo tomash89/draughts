@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -14,9 +15,13 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import pl.edu.agh.draughts.game.DraughtsEngine;
 import pl.edu.agh.draughts.game.elements.Chessboard;
 
 public class DraughtsMain {
+    
+    private static DraughtsEngine draughtsEngine = new DraughtsEngine();
+    private static ChessboardPanel chessboard;
 
     private static void tryToSetSystemLookAndFeel() {
         try {
@@ -31,11 +36,12 @@ public class DraughtsMain {
     private static JFrame createNewFrame() {
         JFrame frame = new JFrame("Draughts");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(new JLayeredPane());
         return frame;
     }
     
     private static void addChessboard(JFrame frame) {
-        JPanel chessboard = new ChessboardPanel(Chessboard.CHESSBOARD_SIZE, 50);
+        chessboard = new ChessboardPanel(Chessboard.CHESSBOARD_SIZE, 50, draughtsEngine);
         frame.getContentPane().add(chessboard);
     }
     
@@ -81,10 +87,13 @@ public class DraughtsMain {
         addMenuBar(frame);
         addStatusBar(frame);
         showFrame(frame);
+        draughtsEngine.initializeGame();
+        chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
     }
     
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 createAndShowGUI();
             }
