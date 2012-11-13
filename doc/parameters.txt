@@ -1,0 +1,31 @@
+Eight simple features: 
++(1) number of pawns and 
++(2) number of kings; 
+Numbers of safe
+- i.e. adjacent to the edge of the board - (3) pawns and (4) kings; Numbers of
+moveable - i.e. able to perform a move other than capturing - (5) pawns and (6)
+kings (these two last parameters were calculated taking no notice of capturing
+priority); (7) Aggregated distance of the pawns to promotion line; (8) Number
+of unoccupied —elds on promotion line.
+
+Eleven layout features: 
++(9) number of defender pieces - i.e. together pawns and kings situated in the two lowermost rows; 
++(10) Number of attacking pawns - i.e. positioned in three topmost rows; 
+Numbers of centrally positioned - i.e. situated on the eight central squares of the board - (11) pawns and (12) kings; Numbers
+of (13) pawns and (14) kings positioned on the main diagonal; Numbers of
+(15) pawns and (16) kings situated on double diagonal; Numbers of loner (17)
+pawns and (18) kings (a loner piece was de—ned as the one not adjacent to any
+other piece); (19) Number of holes - i.e. empty squares adjacent to at least three
+pieces of the same color.
+Six pattern features - described below using common notation presented in
+Fig. 1. All patterns are described from the white player's point of view. Since
+at most one instance of each pattern can exist for each player in a given board
+position, features (20)-(25) can take only boolean values. (20) A Triangle -
+white pawns on squares 27, 31 and 32; (21) An Oreo - white pawns on squares
+26, 30 and 31; (22) A Bridge - white pawns on squares 30 and 32; (23) A Dog
+- white pawn on square 32 and a black one on square 28; (24) A Pawn in the
+Corner - white man on square 29; (25) A King in the Corner - white king on
+square 4;
+
+Legenda:
++ - zaimplementowane

@@ -3,6 +3,7 @@ package pl.edu.agh.draughts.game.elements;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 import pl.edu.agh.draughts.game.exceptions.OutOfChessboardException;
 
 public class Chessboard {
@@ -112,4 +113,28 @@ public class Chessboard {
 	public Piece[][] getChessboardTable() {
 		return this.chessboardTable;
 	}
+
+	public int getFirstLowermostRow(PieceColor pieceColor,
+			int lowermostRowsCount) throws InvalidPieceException {
+		if (pieceColor == null) {
+			throw new InvalidPieceException();
+		}
+		if (pieceColor.equals(PieceColor.WHITE)) {
+			return 0;
+		}
+		return CHESSBOARD_SIZE - lowermostRowsCount;
+	}
+
+	public int getFirstTopmostRow(PieceColor pieceColor, int topmostRowsCount)
+			throws InvalidPieceException {
+		if (pieceColor == null) {
+			throw new InvalidPieceException();
+		}
+		if (pieceColor.equals(PieceColor.WHITE)) {
+			return CHESSBOARD_SIZE - topmostRowsCount;
+		}
+		return 0;
+
+	}
+
 }

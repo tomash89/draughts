@@ -1,6 +1,5 @@
 package pl.edu.agh.draughts.player.random;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
