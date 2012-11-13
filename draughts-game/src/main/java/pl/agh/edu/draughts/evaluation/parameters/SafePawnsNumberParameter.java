@@ -4,12 +4,12 @@ import pl.edu.agh.draughts.game.elements.Pawn;
 import pl.edu.agh.draughts.game.elements.Piece;
 
 /**
- * number of pawns
+ * Numbers of safe - i.e. adjacent to the edge of the board pawns
  * 
  * @author Krzysztof
  * 
  */
-public class PawnNumberParameter extends PieceNumberParameter {
+public class SafePawnsNumberParameter extends SafePiecesNumberParameter {
 
 	@Override
 	protected boolean isExpectedPiece(Piece piece) {

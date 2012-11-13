@@ -12,7 +12,7 @@ import pl.edu.agh.draughts.game.elements.Piece;
 public class KingNumberParameter extends PieceNumberParameter {
 
 	@Override
-	public boolean isExpectedPiece(Piece piece) {
+	protected boolean isExpectedPiece(Piece piece) {
 		return piece instanceof King;
 	}
 

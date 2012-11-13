@@ -30,6 +30,6 @@ public abstract class PieceNumberParameter extends AbstractEvaluationParameter {
 		return pieceCount;
 	}
 
-	public abstract boolean isExpectedPiece(Piece piece);
+	protected abstract boolean isExpectedPiece(Piece piece);
 
 }

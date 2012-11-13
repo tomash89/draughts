@@ -10,7 +10,7 @@ public class Chessboard {
 
 	public static final int CHESSBOARD_SIZE = 8;
 
-	private static final int INITIAL_PAWNS__ROWS_COUNT = 3;
+	public static final int INITIAL_PAWNS__ROWS_COUNT = 3;
 
 	private Piece[][] chessboardTable;
 

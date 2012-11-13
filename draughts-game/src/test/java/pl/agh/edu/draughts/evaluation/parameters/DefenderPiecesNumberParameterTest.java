@@ -1,8 +1,7 @@
 package pl.agh.edu.draughts.evaluation.parameters;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +11,7 @@ import pl.edu.agh.draughts.game.elements.King;
 import pl.edu.agh.draughts.game.elements.PieceColor;
 import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 
-public class DefenderPiecesNumberParameterTest {
+public class DefenderPiecesNumberParameterTest extends ParameterTest {
 
 	private DraughtsEngine draughtsEngine;
 	private DefenderPiecesNumberParameter defenderPiecesNumberParameter;
@@ -21,8 +20,7 @@ public class DefenderPiecesNumberParameterTest {
 	public void setUp() {
 		draughtsEngine = new DraughtsEngine();
 		draughtsEngine.initializeGame();
-		King kingMock = mock(King.class);
-		when(kingMock.getPieceColor()).thenReturn(PieceColor.BLACK);
+		King kingMock = createKingMock(PieceColor.BLACK);
 		draughtsEngine.getChessboard().getChessboardTable()[0][2] = kingMock;
 		draughtsEngine.getChessboard().getChessboardTable()[7][3] = null;
 		defenderPiecesNumberParameter = new DefenderPiecesNumberParameter();

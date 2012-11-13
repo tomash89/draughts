@@ -7,34 +7,36 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pl.edu.agh.draughts.game.DraughtsEngine;
-import pl.edu.agh.draughts.game.elements.King;
+import pl.edu.agh.draughts.game.elements.Pawn;
 import pl.edu.agh.draughts.game.elements.PieceColor;
 import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 
-public class KingNumberParameterTest extends ParameterTest {
+public class SafePawnsNumberParameterTest extends ParameterTest {
 
 	private DraughtsEngine draughtsEngine;
-	private KingNumberParameter kingNumberParameter;
+	private SafePawnsNumberParameter safePawnsNumberParameter;
 
 	@Before
 	public void setUp() {
 		draughtsEngine = new DraughtsEngine();
 		draughtsEngine.initializeGame();
-		King kingMock = createKingMock(PieceColor.BLACK);
-		draughtsEngine.getChessboard().getChessboardTable()[3][3] = kingMock;
-		kingNumberParameter = new KingNumberParameter();
+
+		Pawn blackPawnMock = createPawnMock(PieceColor.BLACK);
+
+		draughtsEngine.getChessboard().getChessboardTable()[1][7] = blackPawnMock;
+
+		safePawnsNumberParameter = new SafePawnsNumberParameter();
 	}
 
 	@Test
 	public void testCalculateValue() {
 		try {
-			assertTrue(kingNumberParameter.calculateValue(
-					draughtsEngine.getChessboard(), PieceColor.WHITE) == 0);
-			assertTrue(kingNumberParameter.calculateValue(
-					draughtsEngine.getChessboard(), PieceColor.BLACK) == 1);
+			assertTrue(safePawnsNumberParameter.calculateValue(
+					draughtsEngine.getChessboard(), PieceColor.WHITE) == 5);
+			assertTrue(safePawnsNumberParameter.calculateValue(
+					draughtsEngine.getChessboard(), PieceColor.BLACK) == 7);
 		} catch (InvalidPieceException e) {
 			fail();
 		}
 	}
-
 }
