@@ -23,14 +23,15 @@ import pl.edu.agh.draughts.game.elements.Piece;
 public class ChessboardPanel extends JPanel implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = 1L;
+    
     private final int rows;
     private final int sizeForEachCell;
+    private final DraughtsEngine draughtsEngine;
+    
     private JLabel chessPiece;
     private int xAdjustment;
     private int yAdjustment;
-    private final DraughtsEngine draughtsEngine;
-    private static final Color FAIR_COLOR = Color.getHSBColor(19f/255f, 90f/255f, 210f/255f);
-    private static final Color DARK_COLOR = Color.getHSBColor(19f/255f, 90f/255f, 114f/255f);
+    private ChessboardCell highlightedCell;
     
     public ChessboardPanel(int rows, int sizeForEachCell, DraughtsEngine draughtsEngine) {
         super();
@@ -39,16 +40,8 @@ public class ChessboardPanel extends JPanel implements MouseListener, MouseMotio
         this.draughtsEngine = draughtsEngine;
         setLayout(new GridLayout(8, 8));
         for (int i = 0; i < 64; i++) {
-            ChessboardCell square = new ChessboardCell(new BorderLayout(), i / 8, i % 8);
+            ChessboardCell square = new ChessboardCell(new BorderLayout(), i / 8, i % 8, CellColor.values()[((i/8)%2+(i%2))%2]);
             add(square);
-
-            int row = (i / 8) % 2;
-            if (row == 0) {
-                square.setBackground(i % 2 == 0 ? DARK_COLOR : FAIR_COLOR);
-            }
-            else {
-                square.setBackground(i % 2 == 0 ? FAIR_COLOR : DARK_COLOR);
-            }
         }
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -96,6 +89,15 @@ public class ChessboardPanel extends JPanel implements MouseListener, MouseMotio
         if (chessPiece == null) {
             return;
         }
+        Component c = findComponentAt(me.getX(), me.getY());
+        if(c instanceof ChessboardCell) {
+            if(highlightedCell != null) {
+                highlightedCell.setHighlighted(false);
+            }
+            ChessboardCell newHighlightedCell = (ChessboardCell) c;
+            ((ChessboardCell) c).setHighlighted(true);
+            highlightedCell = newHighlightedCell;
+        }
         chessPiece.setLocation(me.getX() + xAdjustment, me.getY() + yAdjustment);
     }
 
@@ -109,6 +111,11 @@ public class ChessboardPanel extends JPanel implements MouseListener, MouseMotio
         PawnIcon pawn = (PawnIcon)chessPiece.getIcon();
         List<Move> possibleMoves = draughtsEngine.getPossibleMoves(pawn.getColor());
 
+        if(highlightedCell != null) {
+            highlightedCell.setHighlighted(false);
+            highlightedCell = null;
+        }
+        
         chessPiece.setVisible(false);
         Component c = findComponentAt(e.getX(), e.getY());
 
