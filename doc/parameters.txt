@@ -6,7 +6,7 @@ Eight simple features:
 (5)Numbers of moveable - i.e. able to perform a move other than capturing pawns 
 (6) Numbers of moveable kings 
 +(7) Aggregated distance of the pawns to promotion line; 
-(8) Number of unoccupied fields on promotion line.
++(8) Number of unoccupied fields on promotion line.
 
 Eleven layout features: 
 +(9) number of defender pieces - i.e. together pawns and kings situated in the two lowermost rows; 
@@ -14,9 +14,10 @@ Eleven layout features:
 +(11) Numbers of centrally positioned - i.e. situated on the eight central squares of the board pawns and 
 +(12) Numbers of centrally positionedkings;
  Numbers of (13) pawns and (14) kings positioned on the main diagonal; Numbers of
-(15) pawns and (16) kings situated on double diagonal; Numbers of loner (17)
-pawns and (18) kings (a loner piece was de—ned as the one not adjacent to any
-other piece); (19) Number of holes - i.e. empty squares adjacent to at least three
+(15) pawns and (16) kings situated on double diagonal; 
++(17) Numbers of loner pawns and 
++(18) Numbers of loner kings (a loner piece was de—ned as the one not adjacent to any other piece); 
+(19) Number of holes - i.e. empty squares adjacent to at least three
 pieces of the same color.
 
 Six pattern features - described below(http://www.mini.pw.edu.pl/~kwaledzik/research/papers/ICANNGA07-Checkers.pdf) using common notation presented in
