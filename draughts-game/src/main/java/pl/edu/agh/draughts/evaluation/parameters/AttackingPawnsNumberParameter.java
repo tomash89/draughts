@@ -1,4 +1,4 @@
-package pl.agh.edu.draughts.evaluation.parameters;
+package pl.edu.agh.draughts.evaluation.parameters;
 
 import pl.edu.agh.draughts.game.elements.Chessboard;
 import pl.edu.agh.draughts.game.elements.Pawn;
@@ -7,34 +7,34 @@ import pl.edu.agh.draughts.game.elements.PieceColor;
 import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 
 /**
- * Aggregated distance of the pawns to promotion line;
+ * Number of attacking pawns - i.e. positioned in three topmost rows
  * 
  * @author Krzysztof
  * 
  */
-public class PromotionLineDistanceParameter extends AbstractEvaluationParameter {
+public class AttackingPawnsNumberParameter extends AbstractEvaluationParameter {
+
+	private static final int TOPMOST_ROW_COUNT = 3;
 
 	@Override
 	public float calculateValue(Chessboard chessboard, PieceColor pieceColor)
 			throws InvalidPieceException {
+		int firstLowermostRow = chessboard.getFirstTopmostRow(pieceColor,
+				TOPMOST_ROW_COUNT);
+		int attackingPieceCount = 0;
 		Piece[][] chessboardTable = chessboard.getChessboardTable();
-		// return promotion line row number
-		int promotionLineNumber = chessboard.getFirstTopmostRow(pieceColor, 1);
-		int firstLineNumber = Chessboard.CHESSBOARD_SIZE - promotionLineNumber
-				- 1;
-		int direction = Integer.signum(promotionLineNumber - firstLineNumber);
-		int aggregatedDistane = 0;
-		for (int i = firstLineNumber; i != promotionLineNumber; i += direction) {
+		for (int i = firstLowermostRow; i < firstLowermostRow
+				+ TOPMOST_ROW_COUNT; i++) {
 			for (int j = 0; j < Chessboard.CHESSBOARD_SIZE; j++) {
 				if (chessboardTable[i][j] != null
 						&& chessboardTable[i][j].getPieceColor().equals(
 								pieceColor)
 						&& chessboardTable[i][j] instanceof Pawn) {
-					aggregatedDistane += Math.abs(promotionLineNumber - i);
+					attackingPieceCount++;
 				}
 			}
 		}
-		return aggregatedDistane;
+		return attackingPieceCount;
 	}
 
 }

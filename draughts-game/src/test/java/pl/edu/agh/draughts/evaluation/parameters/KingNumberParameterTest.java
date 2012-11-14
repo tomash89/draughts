@@ -1,4 +1,4 @@
-package pl.agh.edu.draughts.evaluation.parameters;
+package pl.edu.agh.draughts.evaluation.parameters;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
+import pl.edu.agh.draughts.evaluation.parameters.KingNumberParameter;
 import pl.edu.agh.draughts.game.DraughtsEngine;
 import pl.edu.agh.draughts.game.elements.King;
 import pl.edu.agh.draughts.game.elements.PieceColor;

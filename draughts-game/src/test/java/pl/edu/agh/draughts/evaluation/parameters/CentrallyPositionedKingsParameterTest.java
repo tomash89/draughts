@@ -1,10 +1,11 @@
-package pl.agh.edu.draughts.evaluation.parameters;
+package pl.edu.agh.draughts.evaluation.parameters;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import pl.edu.agh.draughts.evaluation.parameters.CentrallyPositionedKingsParameter;
 import pl.edu.agh.draughts.game.DraughtsEngine;
 import pl.edu.agh.draughts.game.elements.King;
 import pl.edu.agh.draughts.game.elements.Pawn;

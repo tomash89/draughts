@@ -1,15 +1,15 @@
-package pl.agh.edu.draughts.evaluation.parameters;
+package pl.edu.agh.draughts.evaluation.parameters;
 
 import pl.edu.agh.draughts.game.elements.King;
 import pl.edu.agh.draughts.game.elements.Piece;
 
 /**
- * number of kings
+ * Numbers of safe kings;
  * 
  * @author Krzysztof
  * 
  */
-public class KingNumberParameter extends PieceNumberParameter {
+public class SafeKingsNumberParameter extends SafePiecesNumberParameter {
 
 	@Override
 	protected boolean isExpectedPiece(Piece piece) {

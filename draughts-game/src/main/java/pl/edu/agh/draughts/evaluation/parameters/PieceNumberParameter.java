@@ -1,4 +1,4 @@
-package pl.agh.edu.draughts.evaluation.parameters;
+package pl.edu.agh.draughts.evaluation.parameters;
 
 import pl.edu.agh.draughts.game.elements.Chessboard;
 import pl.edu.agh.draughts.game.elements.Piece;

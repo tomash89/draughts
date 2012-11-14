@@ -1,4 +1,4 @@
-package pl.agh.edu.draughts.evaluation.parameters;
+package pl.edu.agh.draughts.evaluation.parameters;
 
 /**
  * Number of attacking pawns - i.e. positioned in three topmost rows
