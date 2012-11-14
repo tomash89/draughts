@@ -9,10 +9,4 @@ package pl.edu.agh.draughts.evaluation.parameters;
 public abstract class AbstractEvaluationParameter implements
 		IEvaluationParameter {
 
-	private float weight;
-
-	public float getWeight() {
-		return this.weight;
-	}
-
 }

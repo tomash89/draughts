@@ -7,11 +7,11 @@ import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 /**
  * 
  * @author Krzysztof
- *
+ * 
  */
 public interface IEvaluationParameter {
 
-	public float calculateValue(Chessboard chessboard, PieceColor pieceColor) throws InvalidPieceException;
-	
-	public float getWeight();
+	public float calculateValue(Chessboard chessboard, PieceColor pieceColor)
+			throws InvalidPieceException;
+
 }
