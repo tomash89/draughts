@@ -17,6 +17,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import pl.edu.agh.draughts.game.DraughtsEngine;
+import pl.edu.agh.draughts.game.elements.ChessboardPosition;
 import pl.edu.agh.draughts.game.elements.Move;
 import pl.edu.agh.draughts.game.elements.Piece;
 
@@ -29,6 +30,8 @@ public class ChessboardPanel extends JPanel implements MouseListener, MouseMotio
     private final DraughtsEngine draughtsEngine;
     
     private JLabel chessPiece;
+    private int previousX;
+    private int previousY;
     private int xAdjustment;
     private int yAdjustment;
     private ChessboardCell highlightedCell;
@@ -90,6 +93,9 @@ public class ChessboardPanel extends JPanel implements MouseListener, MouseMotio
             return;
         }
         Component c = findComponentAt(me.getX(), me.getY());
+        if(c instanceof JLabel) {
+            c = c.getParent();
+        }
         if(c instanceof ChessboardCell) {
             if(highlightedCell != null) {
                 highlightedCell.setHighlighted(false);
@@ -110,6 +116,8 @@ public class ChessboardPanel extends JPanel implements MouseListener, MouseMotio
         }
         PawnIcon pawn = (PawnIcon)chessPiece.getIcon();
         List<Move> possibleMoves = draughtsEngine.getPossibleMoves(pawn.getColor());
+        Move move = new Move(draughtsEngine.getChessboard().getChessboardTable()[previousY][previousX], previousY, previousX);
+        //move.addNextStep(new ChessboardPosition(row, column));
 
         if(highlightedCell != null) {
             highlightedCell.setHighlighted(false);

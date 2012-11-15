@@ -1,5 +1,6 @@
 package pl.edu.agh.draughts.game.elements;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -13,7 +14,8 @@ public class Move {
 
 	private Queue<ChessboardPosition> steps = new LinkedList<ChessboardPosition>();
 
-	public Move(Piece piece, int pieceRow, int pieceColumn) {
+
+    public Move(Piece piece, int pieceRow, int pieceColumn) {
 		this.piece = piece;
 		this.pieceRow = pieceRow;
 		this.pieceColumn = pieceColumn;
@@ -21,6 +23,14 @@ public class Move {
 
 	public Piece getPiece() {
 		return piece;
+	}
+	
+	public Queue<ChessboardPosition> getSteps() {
+	    return steps;
+	}
+	
+	public void setSteps(Queue<ChessboardPosition> steps) {
+	    this.steps = steps;
 	}
 
 	public void addNextStep(ChessboardPosition chessboardPosition) {
@@ -70,7 +80,22 @@ public class Move {
         if(piece == null || other.getPiece() == null) {
             return false;
         }
-        
+        if(piece.pieceColor != other.getPiece().pieceColor) {
+            return false;
+        }
+        //Checking for King/Pawn is unnecessary in our context
+        Iterator<ChessboardPosition> otherStepsIt = other.getSteps().iterator();
+        for(ChessboardPosition chessboardPosition : steps) {
+            if(!otherStepsIt.hasNext()) {
+                return false;
+            }
+            if(!chessboardPosition.equals(otherStepsIt.next())) {
+                return false;
+            }
+        }
+        if(otherStepsIt.hasNext()) {
+            return false;
+        }
         return true;
 	    
 	}
