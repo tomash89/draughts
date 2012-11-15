@@ -7,8 +7,8 @@ import pl.edu.agh.draughts.game.exceptions.OutOfChessboardException;
 
 public class Pawn extends Piece {
 
-	public Pawn(PieceColor pieceColor, Chessboard chessboard) {
-		super(pieceColor, chessboard);
+	public Pawn(PieceColor pieceColor) {
+		super(pieceColor);
 	}
 
 	@Override

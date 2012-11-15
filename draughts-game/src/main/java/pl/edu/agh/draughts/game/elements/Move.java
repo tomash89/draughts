@@ -43,7 +43,7 @@ public class Move {
 
 		if ((piece.getPieceColor().equals(PieceColor.WHITE) && pieceRow == Chessboard.CHESSBOARD_SIZE - 1)
 				|| (piece.getPieceColor().equals(PieceColor.BLACK) && pieceRow == 0)) {
-			piece = new King(piece.getPieceColor(), chessboard);
+			piece = new King(piece.getPieceColor());
 			chessboard.movePiece(pieceRow, pieceColumn, piece);
 
 			System.out.println("New king!");
@@ -52,5 +52,32 @@ public class Move {
 
 	public int getMoveLength() {
 		return steps.size();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Move other = (Move) obj;
+        if (pieceRow != other.pieceRow)
+            return false;
+        if (pieceColumn != other.pieceColumn)
+            return false;
+        if(piece == null || other.getPiece() == null) {
+            return false;
+        }
+        
+        return true;
+	    
+	}
+	
+	@Override
+	public int hashCode() {
+	    // TODO
+	    return super.hashCode();
 	}
 }

@@ -12,19 +12,13 @@ public abstract class Piece {
 
 	protected PieceColor pieceColor;
 
-	private Chessboard chessboard;
-
-	public Piece(PieceColor pieceColor, Chessboard chessboard) {
+	public Piece(PieceColor pieceColor) {
 		super();
 		this.pieceColor = pieceColor;
 	}
 
 	public PieceColor getPieceColor() {
 		return pieceColor;
-	}
-
-	public Chessboard getChessboard() {
-		return this.chessboard;
 	}
 
 	public List<Move> getValidCaptureMoves(int row, int column,

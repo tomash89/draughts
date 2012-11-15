@@ -27,9 +27,9 @@ public class Chessboard {
 	private void initializeChessboard() {
 		for (int i = 0; i < INITIAL_PAWNS__ROWS_COUNT; i++) {
 			for (int j = i % 2; j < CHESSBOARD_SIZE; j += 2) {
-				chessboardTable[i][j] = new Pawn(PieceColor.WHITE, this);
+				chessboardTable[i][j] = new Pawn(PieceColor.WHITE);
 				chessboardTable[CHESSBOARD_SIZE - i - 1][CHESSBOARD_SIZE - j
-						- 1] = new Pawn(PieceColor.BLACK, this);
+						- 1] = new Pawn(PieceColor.BLACK);
 			}
 		}
 	}

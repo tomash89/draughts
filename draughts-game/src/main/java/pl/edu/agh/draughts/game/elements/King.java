@@ -7,8 +7,8 @@ import pl.edu.agh.draughts.game.exceptions.OutOfChessboardException;
 
 public class King extends Piece {
 
-	public King(PieceColor pieceColor, Chessboard chessboard) {
-		super(pieceColor, chessboard);
+	public King(PieceColor pieceColor) {
+		super(pieceColor);
 	}
 
 	@Override
