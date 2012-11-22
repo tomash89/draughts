@@ -21,7 +21,7 @@ public class ChessboardPanel extends JPanel {
         this.sizeForEachCell = sizeForEachCell;
         setLayout(new GridLayout(rows, rows));
         for (int i = 0; i < rows * rows; i++) {
-            ChessboardCell square = new ChessboardCell(new BorderLayout(), i / rows, i % rows,
+            ChessboardCell square = new ChessboardCell(new BorderLayout(), i % rows, i / rows,
                     CellColor.values()[((i / rows) % 2 + (i % 2)) % 2]);
             add(square);
         }

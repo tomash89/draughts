@@ -90,17 +90,25 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
         
         Component c = chessboardPanel.findComponentAt(e.getX(), e.getY());
 
+        
+        boolean rollback = false;
         if (c instanceof ChessboardCell) {
+            ChessboardCell dropCell = (ChessboardCell) c;
             try{
-                ChessboardCell dropCell = (ChessboardCell) c;
                 chessboardControler.testMove(chessPiece, dropCell);
             } catch(NotValidMoveException ex) {
                 System.err.println("Not a valid move dude!"+ex);
-                chessPiece.setVisible(false);
-                ChessboardCell rollbackCell = chessboardPanel.getChessboardCell(chessPiece.getRow(), chessPiece.getColumn());
-                rollbackCell.add(chessPiece);
-                chessPiece.setVisible(true);                
+                System.err.println(String.format("%s to %s", chessPiece.getChessboardPosition(), dropCell.getChessboardPosition()));
+                rollback = true;             
             }
+        } else {
+            rollback = true;
+        }
+        if(rollback) {
+            chessPiece.setVisible(false);
+            ChessboardCell rollbackCell = chessboardPanel.getChessboardCell(chessPiece.getRow(), chessPiece.getColumn());
+            rollbackCell.add(chessPiece);
+            chessPiece.setVisible(true); 
         }
 
     }
