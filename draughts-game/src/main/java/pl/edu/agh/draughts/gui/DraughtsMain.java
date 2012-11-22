@@ -78,13 +78,17 @@ public class DraughtsMain {
         frame.setVisible(true);
     }
     
-    private static void createAndAddMouseListeners() {
+    private static void createAndAddMouseListenersAndControler() {
         ChessboardMouseListener chessboardMouseListener = new ChessboardMouseListener();
         chessboard.addMouseListener(chessboardMouseListener);
         chessboard.addMouseMotionListener(chessboardMouseListener);
         chessboardMouseListener.setChessboardPanel(chessboard);
+        
+        ChessboardControler chessboardControler = new ChessboardControler();
+        chessboardMouseListener.setChessboardControler(chessboardControler);
+        chessboardControler.setChessboardPanel(chessboard);
+        chessboardControler.setDraughtsEngine(draughtsEngine);
     }
-    
     
     private static void createAndShowGUI() {
         tryToSetSystemLookAndFeel();
@@ -93,10 +97,10 @@ public class DraughtsMain {
         addInformationPanel(frame);
         addMenuBar(frame);
         addStatusBar(frame);
-        showFrame(frame);
         draughtsEngine.initializeGame();
         chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
-        createAndAddMouseListeners();
+        createAndAddMouseListenersAndControler();
+        showFrame(frame);
     }
     
     public static void main(String[] args) {

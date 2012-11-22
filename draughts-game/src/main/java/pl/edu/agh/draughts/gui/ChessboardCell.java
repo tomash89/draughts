@@ -4,6 +4,8 @@ import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
+import pl.edu.agh.draughts.game.elements.ChessboardPosition;
+
 public class ChessboardCell extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -32,6 +34,10 @@ public class ChessboardCell extends JPanel {
 
     public int getRow() {
         return row;
+    }
+    
+    public ChessboardPosition getChessboardPosition() {
+        return new ChessboardPosition(row, column);
     }
     
     public void setHighlighted(boolean highlighted) {

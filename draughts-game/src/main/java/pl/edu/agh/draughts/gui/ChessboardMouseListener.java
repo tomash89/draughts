@@ -18,6 +18,7 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
     
     
     private ChessboardPanel chessboardPanel;
+    private ChessboardControler chessboardControler;
 
     private PieceLabel chessPiece;
     private int xAdjustment;
@@ -30,6 +31,14 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
     
     public void setChessboardPanel(ChessboardPanel chessboardPanel) {
         this.chessboardPanel = chessboardPanel;
+    }
+    
+    public ChessboardControler getChessboardControler() {
+        return chessboardControler;
+    }
+    
+    public void setChessboardControler(ChessboardControler chessboardControler) {
+        this.chessboardControler = chessboardControler;
     }
     
     @Override
@@ -74,6 +83,7 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
         if (chessPiece == null) {
             return;
         }
+        
 //        PieceIcon pawn = (PieceIcon)chessPiece.getIcon();
 //        List<Move> possibleMoves = draughtsEngine.getPossibleMoves(pawn.getColor());
 //        Move move = new Move(draughtsEngine.getChessboard().getChessboardTable()[previousY][previousX], previousY, previousX);
@@ -84,18 +94,15 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
             highlightedCell = null;
         }
         
-        chessPiece.setVisible(false);
         Component c = chessboardPanel.findComponentAt(e.getX(), e.getY());
 
-        if (c instanceof JLabel) {
-            Container parent = c.getParent();
-            parent.remove(0);
-            parent.add(chessPiece);
-        } else {
-            Container parent = (Container) c;
-            parent.add(chessPiece);
+        if (c instanceof ChessboardCell) {
+            chessPiece.setVisible(false);            
+            ChessboardCell dropCell = (ChessboardCell) c;
+            chessboardControler.testMove(chessPiece, dropCell);
+            dropCell.add(chessPiece);
+            chessPiece.setVisible(true);
         }
 
-        chessPiece.setVisible(true);
     }
 }
