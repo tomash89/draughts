@@ -10,6 +10,7 @@ public class ChessboardCell extends JPanel {
     private final int column;
     private final int row;
     private final CellColor color;
+    private PieceLabel piece; 
     
     private boolean highlighted;
 
@@ -44,5 +45,19 @@ public class ChessboardCell extends JPanel {
 
     public boolean isHighlighted() {
         return highlighted;
+    }
+    
+    public void setPiece(PieceLabel piece) {
+        this.piece = piece;
+        add(piece);
+    }
+    
+    public void removePiece() {
+        remove(piece);
+        this.piece = null;
+    }
+    
+    public PieceLabel getPiece() {
+        return piece;
     }
 }

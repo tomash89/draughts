@@ -41,7 +41,7 @@ public class DraughtsMain {
     }
     
     private static void addChessboard(JFrame frame) {
-        chessboard = new ChessboardPanel(Chessboard.CHESSBOARD_SIZE, 50, draughtsEngine);
+        chessboard = new ChessboardPanel(Chessboard.CHESSBOARD_SIZE, 50);
         frame.getContentPane().add(chessboard);
     }
     
@@ -78,6 +78,13 @@ public class DraughtsMain {
         frame.setVisible(true);
     }
     
+    private static void createAndAddMouseListeners() {
+        ChessboardMouseListener chessboardMouseListener = new ChessboardMouseListener();
+        chessboard.addMouseListener(chessboardMouseListener);
+        chessboard.addMouseMotionListener(chessboardMouseListener);
+        chessboardMouseListener.setChessboardPanel(chessboard);
+    }
+    
     
     private static void createAndShowGUI() {
         tryToSetSystemLookAndFeel();
@@ -89,6 +96,7 @@ public class DraughtsMain {
         showFrame(frame);
         draughtsEngine.initializeGame();
         chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
+        createAndAddMouseListeners();
     }
     
     public static void main(String[] args) {
