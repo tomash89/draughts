@@ -107,8 +107,10 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
         if(rollback) {
             chessPiece.setVisible(false);
             ChessboardCell rollbackCell = chessboardPanel.getChessboardCell(chessPiece.getRow(), chessPiece.getColumn());
-            rollbackCell.add(chessPiece);
+            rollbackCell.setPiece(chessPiece);
             chessPiece.setVisible(true); 
+        } else {
+            ((JLayeredPane) chessboardPanel.getParent().getParent()).remove(chessPiece);
         }
 
     }

@@ -32,7 +32,7 @@ public class ChessboardPanel extends JPanel {
             for (int column = 0; column < rows; column++) {
                 Piece piece = pieces[row][column];
                 if (piece != null) {
-                    getChessboardCell(row, column).add(
+                    getChessboardCell(row, column).setPiece(
                             new PawnLabel(piece.getPieceColor(), column, row, sizeForEachCell));
                 }
             }
@@ -42,7 +42,7 @@ public class ChessboardPanel extends JPanel {
     public void clearPieces() {
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < rows; column++) {
-                getChessboardCell(row, column);
+                getChessboardCell(row, column).removePiece();
             }
         }
     }

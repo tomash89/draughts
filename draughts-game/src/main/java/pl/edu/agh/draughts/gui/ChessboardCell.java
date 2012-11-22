@@ -12,8 +12,8 @@ public class ChessboardCell extends JPanel {
     private final int column;
     private final int row;
     private final CellColor color;
-    private PieceLabel piece; 
-    
+    private PieceLabel piece;
+
     private boolean highlighted;
 
     public ChessboardCell(LayoutManager layout, int column, int row, CellColor color) {
@@ -35,14 +35,14 @@ public class ChessboardCell extends JPanel {
     public int getRow() {
         return row;
     }
-    
+
     public ChessboardPosition getChessboardPosition() {
         return new ChessboardPosition(row, column);
     }
-    
+
     public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
-        if(highlighted) {
+        if (highlighted) {
             setBackground(color.getHighlightedColor());
         } else {
             setBackground(color.getColor());
@@ -52,17 +52,19 @@ public class ChessboardCell extends JPanel {
     public boolean isHighlighted() {
         return highlighted;
     }
-    
+
     public void setPiece(PieceLabel piece) {
         this.piece = piece;
         add(piece);
     }
-    
+
     public void removePiece() {
-        remove(piece);
+        if (piece != null) {
+            remove(piece);
+        }
         this.piece = null;
     }
-    
+
     public PieceLabel getPiece() {
         return piece;
     }
