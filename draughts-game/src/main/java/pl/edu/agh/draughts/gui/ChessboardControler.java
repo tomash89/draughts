@@ -54,20 +54,24 @@ public class ChessboardControler {
         this.draughtsEngine = draughtsEngine;
     }
 
-    public void testMove(PieceLabel piece, ChessboardCell cell) {
+    public void testMove(PieceLabel piece, ChessboardCell cell) throws NotValidMoveException {
         List<Move> possibleMoves = draughtsEngine.getPossibleMoves(piece.getColor());
         Move move = new Move(new Pawn(piece.getColor()), piece.getRow(), piece.getColumn()); // TODO: King
         LinkedList<ChessboardPosition> steps = makePostionsLine(piece.getChessboardPosition(), cell.getChessboardPosition());
         move.setSteps(steps);
         if(possibleMoves.contains(move)) {
            draughtsEngine.doMove(move);
-           List<Move> possibleMovesForOpponent = draughtsEngine.getPossibleMoves(PieceColor.BLACK);
+           draughtsEngine.printChessboard();
+           List<Move> possibleMovesForOpponent = draughtsEngine.getPossibleMoves(PieceColor.BLACK); //TODO
            if (!possibleMoves.isEmpty()) {
                int moveSelection = random.nextInt(possibleMoves.size());
                draughtsEngine.doMove(possibleMovesForOpponent.get(moveSelection));
+               draughtsEngine.printChessboard();
            }
            chessboardPanel.clearPieces();
            chessboardPanel.addPieces(draughtsEngine.getChessboard().getChessboardTable());
+        } else {
+            throw new NotValidMoveException();
         }
     }
 }

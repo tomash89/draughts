@@ -1,18 +1,12 @@
 package pl.edu.agh.draughts.gui;
 
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-
-import pl.edu.agh.draughts.game.elements.Move;
 
 public class ChessboardMouseListener extends MouseAdapter implements MouseMotionListener {
     
@@ -97,11 +91,16 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
         Component c = chessboardPanel.findComponentAt(e.getX(), e.getY());
 
         if (c instanceof ChessboardCell) {
-            chessPiece.setVisible(false);            
-            ChessboardCell dropCell = (ChessboardCell) c;
-            chessboardControler.testMove(chessPiece, dropCell);
-            dropCell.add(chessPiece);
-            chessPiece.setVisible(true);
+            try{
+                ChessboardCell dropCell = (ChessboardCell) c;
+                chessboardControler.testMove(chessPiece, dropCell);
+            } catch(NotValidMoveException ex) {
+                System.err.println("Not a valid move dude!"+ex);
+                chessPiece.setVisible(false);
+                ChessboardCell rollbackCell = chessboardPanel.getChessboardCell(chessPiece.getRow(), chessPiece.getColumn());
+                rollbackCell.add(chessPiece);
+                chessPiece.setVisible(true);                
+            }
         }
 
     }

@@ -85,6 +85,13 @@ public class Move {
         }
         //Checking for King/Pawn is unnecessary in our context
         Iterator<ChessboardPosition> otherStepsIt = other.getSteps().iterator();
+        if(steps == null) { // This is actually weird as f..
+            if(other.getSteps() == null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         for(ChessboardPosition chessboardPosition : steps) {
             if(!otherStepsIt.hasNext()) {
                 return false;
