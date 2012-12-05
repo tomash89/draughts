@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import pl.edu.agh.draughts.ai.RandomPlayer;
 import pl.edu.agh.draughts.game.DraughtsEngine;
 import pl.edu.agh.draughts.game.elements.Chessboard;
 
@@ -97,6 +98,7 @@ public class DraughtsMain {
         addInformationPanel(frame);
         addMenuBar(frame);
         addStatusBar(frame);
+        draughtsEngine.setBlackPlayer(new RandomPlayer());
         draughtsEngine.initializeGame();
         chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
         createAndAddMouseListenersAndControler();

@@ -12,7 +12,7 @@ public class Chessboard {
 
 	public static final int INITIAL_PAWNS__ROWS_COUNT = 3;
 
-	private Piece[][] chessboardTable;
+	private final Piece[][] chessboardTable;
 
 	public Chessboard() {
 		this.chessboardTable = new Piece[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
@@ -70,6 +70,14 @@ public class Chessboard {
 	void movePiece(int row, int column, Piece piece) {
 		this.chessboardTable[row][column] = piece;
 	}
+
+    public List<Move> getPossibleMoves(PieceColor pieceColor) {
+        List<Move> result = getCaptureMoves(pieceColor);
+        if (result == null || result.isEmpty()) {
+            result = getNoCaptureMoves(pieceColor);
+        }
+        return result;
+    }
 
 	public List<Move> getCaptureMoves(PieceColor pieceColor) {
 		List<Move> captureMoves = new LinkedList<Move>();

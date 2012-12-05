@@ -2,7 +2,8 @@ package pl.edu.agh.draughts.gui;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.SwingUtilities;
 
@@ -12,14 +13,12 @@ import pl.edu.agh.draughts.game.elements.King;
 import pl.edu.agh.draughts.game.elements.Move;
 import pl.edu.agh.draughts.game.elements.Pawn;
 import pl.edu.agh.draughts.game.elements.Piece;
-import pl.edu.agh.draughts.game.elements.PieceColor;
 
-public class ChessboardControler {
+public class ChessboardControler implements Observer {
 
     private ChessboardPanel chessboardPanel;
     private DraughtsEngine draughtsEngine;
     private Move currentMove;
-    private final Random random = new Random();
 
     public ChessboardPanel getChessboardPanel() {
         return chessboardPanel;
@@ -34,18 +33,13 @@ public class ChessboardControler {
     }
 
     public void setDraughtsEngine(DraughtsEngine draughtsEngine) {
+        draughtsEngine.deleteObserver(this);
         this.draughtsEngine = draughtsEngine;
+        draughtsEngine.addObserver(this);
     }
 
-    public void doMove(Move move) {
-        draughtsEngine.doMove(move);
-        draughtsEngine.printChessboard();
-        List<Move> possibleMovesForOpponent = draughtsEngine.getPossibleMoves(PieceColor.BLACK); // TODO
-        if (!possibleMovesForOpponent.isEmpty()) {
-            int moveSelection = random.nextInt(possibleMovesForOpponent.size());
-            draughtsEngine.doMove(possibleMovesForOpponent.get(moveSelection));
-            draughtsEngine.printChessboard();
-        }
+    @Override
+    public void update(Observable o, Object arg) {
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -56,6 +50,11 @@ public class ChessboardControler {
                 chessboardPanel.setVisible(true);
             }
         });
+    }
+
+    public void doMove(Move move) {
+        draughtsEngine.doMove(move);
+        draughtsEngine.printChessboard();
         currentMove = null;
     }
 

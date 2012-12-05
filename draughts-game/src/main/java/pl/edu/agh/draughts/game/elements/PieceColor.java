@@ -25,4 +25,12 @@ public enum PieceColor {
 			return false;
 		return !this.equals(pieceColor);
 	}
+
+    public PieceColor getOpponentColor() {
+        if (this == WHITE) {
+            return BLACK;
+        } else {
+            return WHITE;
+        }
+    }
 }
