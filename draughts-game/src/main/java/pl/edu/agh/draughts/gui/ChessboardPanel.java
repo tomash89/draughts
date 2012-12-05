@@ -38,7 +38,7 @@ public class ChessboardPanel extends JPanel {
                     if (piece instanceof Pawn) {
                         pieceLabel = new PawnLabel(piece.getPieceColor(), column, row, sizeForEachCell);
                     } else if (piece instanceof King) {
-                        pieceLabel = new PawnLabel(piece.getPieceColor(), column, row, sizeForEachCell);
+                        pieceLabel = new KingLabel(piece.getPieceColor(), column, row, sizeForEachCell);
                     }
                     getChessboardCell(row, column).setPiece(pieceLabel);
                 }
