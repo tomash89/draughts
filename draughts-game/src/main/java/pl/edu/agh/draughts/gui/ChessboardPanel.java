@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import pl.edu.agh.draughts.game.elements.King;
+import pl.edu.agh.draughts.game.elements.Pawn;
 import pl.edu.agh.draughts.game.elements.Piece;
 
 public class ChessboardPanel extends JPanel {
@@ -32,8 +34,13 @@ public class ChessboardPanel extends JPanel {
             for (int column = 0; column < rows; column++) {
                 Piece piece = pieces[row][column];
                 if (piece != null) {
-                    getChessboardCell(row, column).setPiece(
-                            new PawnLabel(piece.getPieceColor(), column, row, sizeForEachCell));
+                    PieceLabel pieceLabel = null;
+                    if (piece instanceof Pawn) {
+                        pieceLabel = new PawnLabel(piece.getPieceColor(), column, row, sizeForEachCell);
+                    } else if (piece instanceof King) {
+                        pieceLabel = new PawnLabel(piece.getPieceColor(), column, row, sizeForEachCell);
+                    }
+                    getChessboardCell(row, column).setPiece(pieceLabel);
                 }
             }
         }

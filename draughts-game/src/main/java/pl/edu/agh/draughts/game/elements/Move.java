@@ -118,4 +118,27 @@ public class Move {
         // TODO
         return super.hashCode();
     }
+
+    public boolean isValidMovePrefix(Move otherMove) {
+        Piece otherPiece = otherMove.getPiece();
+        if (otherPiece.getPieceColor() != piece.getPieceColor() || otherMove.getPieceColumn() != pieceColumn
+                || otherMove.getPieceRow() != pieceRow) {
+            return false;
+        }
+        Iterator<ChessboardPosition> it = steps.iterator();
+        for (ChessboardPosition cp : otherMove.getSteps()) {
+            if (!it.hasNext() || !cp.equals(it.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int getPieceRow() {
+        return pieceRow;
+    }
+
+    public int getPieceColumn() {
+        return pieceColumn;
+    }
 }
