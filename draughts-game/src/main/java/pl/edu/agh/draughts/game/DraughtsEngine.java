@@ -2,8 +2,10 @@ package pl.edu.agh.draughts.game;
 
 import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import pl.edu.agh.draughts.ai.AIPlayer;
+import pl.edu.agh.draughts.ai.AITask;
 import pl.edu.agh.draughts.game.elements.Chessboard;
 import pl.edu.agh.draughts.game.elements.Move;
 import pl.edu.agh.draughts.game.elements.PieceColor;
@@ -14,6 +16,7 @@ public class DraughtsEngine extends Observable {
     private PieceColor currentPlayerColor = PieceColor.WHITE;
     private AIPlayer whitePlayer;
     private AIPlayer blackPlayer;
+    private final ScheduledThreadPoolExecutor aiExecutor = new ScheduledThreadPoolExecutor(1);
 
 	public void initializeGame() {
 		this.chessboard = new Chessboard();
@@ -33,19 +36,18 @@ public class DraughtsEngine extends Observable {
             currentPlayer = blackPlayer;
         }
         if (currentPlayer != null) {
-            Move move = currentPlayer.suggestMove(chessboard, currentPlayerColor);
-            if (move != null) {
-                doMove(move);
-            }
+            aiExecutor.execute(new AITask(currentPlayer, chessboard, currentPlayerColor, this));
         }
     }
 
 	public void doMove(Move move) {
+	    if (move != null) {
 		move.doMove(this.chessboard);
         this.currentPlayerColor = currentPlayerColor.getOpponentColor();
         setChanged();
         notifyObservers();
         tryToMoveOpponent();
+	    }
 	}
 
 	public Chessboard getChessboard() {

@@ -17,6 +17,11 @@ public class Pawn extends Piece {
 	}
 
 	@Override
+    public Piece copyOf() {
+        return new Pawn(pieceColor);
+    }
+
+    @Override
 	protected List<ChessboardPosition> getCapturePositions(int row, int column,
 			Chessboard chessboard) {
 		List<ChessboardPosition> capturePositions = new LinkedList<ChessboardPosition>();

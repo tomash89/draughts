@@ -21,6 +21,8 @@ public abstract class Piece {
 		return pieceColor;
 	}
 
+    public abstract Piece copyOf();
+
 	public List<Move> getValidCaptureMoves(int row, int column,
 			Chessboard chessboard) {
 		List<Move> validCaptureMoves = new LinkedList<Move>();

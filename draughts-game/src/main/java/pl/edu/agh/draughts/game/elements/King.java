@@ -17,6 +17,11 @@ public class King extends Piece {
 	}
 
 	@Override
+    public Piece copyOf() {
+        return new King(pieceColor);
+    }
+
+    @Override
 	public List<Move> getValidNoCaptureMoves(int row, int column,
 			Chessboard chessboard) {
 		List<Move> noCaptureMoves = new LinkedList<Move>();

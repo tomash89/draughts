@@ -14,6 +14,11 @@ public class RandomPlayer implements AIPlayer {
     @Override
     public Move suggestMove(Chessboard chessboard, PieceColor pieceColor) {
         List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace(System.err);
+        }
         if (!possibleMoves.isEmpty()) {
             int moveSelection = random.nextInt(possibleMoves.size());
             return possibleMoves.get(moveSelection);

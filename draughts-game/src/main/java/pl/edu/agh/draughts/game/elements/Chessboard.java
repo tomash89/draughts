@@ -19,6 +19,17 @@ public class Chessboard {
 		initializeChessboard();
 	}
 
+    public Chessboard(Chessboard chessboard) {
+        this.chessboardTable = new Piece[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
+        for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+            for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                if (chessboard.chessboardTable[i][j] != null) {
+                    this.chessboardTable[i][j] = chessboard.chessboardTable[i][j].copyOf();
+                }
+            }
+        }
+    }
+
 	public boolean doMove(Move move) {
 		boolean result = false;
 		return result;
@@ -144,5 +155,7 @@ public class Chessboard {
 		return 0;
 
 	}
+
+
 
 }

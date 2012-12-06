@@ -20,6 +20,12 @@ public class Move {
         this.pieceColumn = pieceColumn;
     }
 
+    public Move copyOf() {
+        Move move = new Move(piece.copyOf(), pieceRow, pieceColumn);
+        move.setSteps(getSteps());
+        return move;
+    }
+
     public Piece getPiece() {
         return piece;
     }

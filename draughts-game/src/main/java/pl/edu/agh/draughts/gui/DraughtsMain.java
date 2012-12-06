@@ -2,6 +2,8 @@ package pl.edu.agh.draughts.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
 import pl.edu.agh.draughts.ai.RandomPlayer;
+import pl.edu.agh.draughts.ai.SmartPlayer;
 import pl.edu.agh.draughts.game.DraughtsEngine;
 import pl.edu.agh.draughts.game.elements.Chessboard;
 
@@ -23,6 +26,7 @@ public class DraughtsMain {
     
     private static DraughtsEngine draughtsEngine = new DraughtsEngine();
     private static ChessboardPanel chessboard;
+    private static JFrame frame;
 
     private static void tryToSetSystemLookAndFeel() {
         try {
@@ -35,7 +39,7 @@ public class DraughtsMain {
     }
     
     private static JFrame createNewFrame() {
-        JFrame frame = new JFrame("Draughts");
+        frame = new JFrame("Draughts");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(new JLayeredPane());
         return frame;
@@ -56,6 +60,14 @@ public class DraughtsMain {
         JMenuBar jMenuBar = new JMenuBar();
         JMenu gameMenu = new JMenu("Game");
         JMenuItem newGame = new JMenuItem("New");
+        newGame.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // new JDialog(frame, "New game");
+                
+            }
+        });
         JMenuItem end = new JMenuItem("End");
         gameMenu.add(newGame);
         gameMenu.add(end);
@@ -98,6 +110,7 @@ public class DraughtsMain {
         addInformationPanel(frame);
         addMenuBar(frame);
         addStatusBar(frame);
+        draughtsEngine.setWhitePlayer(new SmartPlayer());
         draughtsEngine.setBlackPlayer(new RandomPlayer());
         draughtsEngine.initializeGame();
         chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
