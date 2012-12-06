@@ -7,28 +7,31 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import pl.edu.agh.draughts.ai.AIPlayer;
 import pl.edu.agh.draughts.ai.AITask;
 import pl.edu.agh.draughts.game.elements.Chessboard;
+import pl.edu.agh.draughts.game.elements.GameResult;
 import pl.edu.agh.draughts.game.elements.Move;
 import pl.edu.agh.draughts.game.elements.PieceColor;
 
 public class DraughtsEngine extends Observable {
 
-	private Chessboard chessboard;
+    private Chessboard chessboard;
     private PieceColor currentPlayerColor = PieceColor.WHITE;
     private AIPlayer whitePlayer;
     private AIPlayer blackPlayer;
+    private GameResult gameResult;
     private final ScheduledThreadPoolExecutor aiExecutor = new ScheduledThreadPoolExecutor(1);
 
-	public void initializeGame() {
-		this.chessboard = new Chessboard();
-		System.out.println(this.chessboard);
+    public void initializeGame() {
+        this.chessboard = new Chessboard();
+        System.out.println(this.chessboard);
         currentPlayerColor = PieceColor.WHITE;
-	}
+        gameResult = GameResult.PENDING;
+    }
 
-	public List<Move> getPossibleMoves(PieceColor pieceColor) {
+    public List<Move> getPossibleMoves(PieceColor pieceColor) {
         return chessboard.getPossibleMoves(pieceColor);
-	}
+    }
 
-    public void tryToMoveOpponent() {
+    public void tryToMoveAutomatically() {
         AIPlayer currentPlayer;
         if (currentPlayerColor == PieceColor.WHITE) {
             currentPlayer = whitePlayer;
@@ -40,19 +43,29 @@ public class DraughtsEngine extends Observable {
         }
     }
 
-	public void doMove(Move move) {
-	    if (move != null) {
-		move.doMove(this.chessboard);
-        this.currentPlayerColor = currentPlayerColor.getOpponentColor();
-        setChanged();
-        notifyObservers();
-        tryToMoveOpponent();
-	    }
-	}
+    public void doMove(Move move) {
+        if (move != null) {
+            move.doMove(this.chessboard);
+            this.currentPlayerColor = currentPlayerColor.getOpponentColor();
+            setChanged();
+            notifyObservers();
+            tryToMoveAutomatically();
+        } else {
+            if (currentPlayerColor == PieceColor.BLACK) {
+                gameResult = GameResult.WHITE_WON;
+                System.out.println("White won");
+            } else {
+                gameResult = GameResult.BLACK_WON;
+                System.out.println("Black won");
+            }
+            setChanged();
+            notifyObservers(gameResult);
+        }
+    }
 
-	public Chessboard getChessboard() {
-		return chessboard;
-	}
+    public Chessboard getChessboard() {
+        return chessboard;
+    }
 
     public AIPlayer getWhitePlayer() {
         return whitePlayer;

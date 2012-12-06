@@ -10,12 +10,17 @@ import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 public class SmartPlayer implements AIPlayer {
 
     private final ParametersVector parametersVector = ParametersVector.getAllParametersVector();
+    private final int delay;
+
+    public SmartPlayer(int delay) {
+        this.delay = delay;
+    }
 
     @Override
     public Move suggestMove(Chessboard chessboard, PieceColor pieceColor) {
         List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace(System.err);
         }
