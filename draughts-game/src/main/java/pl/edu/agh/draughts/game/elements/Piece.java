@@ -21,7 +21,7 @@ public abstract class Piece {
 		return pieceColor;
 	}
 
-    public abstract Piece copyOf();
+	public abstract Piece copyOf();
 
 	public List<Move> getValidCaptureMoves(int row, int column,
 			Chessboard chessboard) {
@@ -73,6 +73,9 @@ public abstract class Piece {
 			if (newMoveLength > maxMoveLength) {
 				validCaptureMoves.clear();
 				maxMoveLength = newMoveLength;
+				validCaptureMoves.add(move);
+			}
+			else if(newMoveLength == maxMoveLength) {
 				validCaptureMoves.add(move);
 			}
 		}
