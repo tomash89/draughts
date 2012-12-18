@@ -15,6 +15,10 @@ public class EvaluationFunction implements IEvaluationParameter {
 		this.evaluationFunctionParameters = evaluationFunctionParameters;
 	}
 
+	public Map<IEvaluationParameter, Double> getEvaluationFunctionParameters() {
+		return this.evaluationFunctionParameters;
+	}
+
 	@Override
 	public float calculateValue(Chessboard chessboard, PieceColor pieceColor)
 			throws InvalidPieceException {
