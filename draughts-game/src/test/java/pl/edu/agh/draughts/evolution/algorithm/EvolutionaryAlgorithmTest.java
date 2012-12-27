@@ -69,4 +69,22 @@ public class EvolutionaryAlgorithmTest {
 		}
 	}
 
+	@Test
+	public void testEvaluatePopulation() {
+		this.evolutionaryAlgorithm
+				.prepareInitialPopulation(this.evaluationFunction);
+		Map<EvaluationFunction, Integer> evaluation = this.evolutionaryAlgorithm
+				.evaluatePopulation();
+		for (EvaluationFunction evaluationFunction : evaluation.keySet()) {
+			System.out.println("- function - "
+					+ evaluation.get(evaluationFunction));
+		}
+		this.evolutionaryAlgorithm.createNextPopulation(evaluation);
+	}
+
+	@Test
+	public void testCompute() {
+		this.evolutionaryAlgorithm.compute(this.evaluationFunction,
+				"src/main/resources/winner.txt");
+	}
 }
