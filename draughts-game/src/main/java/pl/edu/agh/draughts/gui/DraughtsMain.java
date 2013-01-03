@@ -110,8 +110,8 @@ public class DraughtsMain {
         addInformationPanel(frame);
         addMenuBar(frame);
         addStatusBar(frame);
-        draughtsEngine.setWhitePlayer(new SmartPlayer(1000));
-        draughtsEngine.setBlackPlayer(new RandomPlayer(1000));
+//        draughtsEngine.setBlackPlayer(new RandomPlayer(1000));
+        draughtsEngine.setBlackPlayer(new SmartPlayer(3));
         draughtsEngine.initializeGame();
         chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
         createAndAddMouseListenersAndControler();
