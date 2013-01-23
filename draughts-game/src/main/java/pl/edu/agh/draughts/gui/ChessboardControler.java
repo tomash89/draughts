@@ -54,7 +54,7 @@ public class ChessboardControler implements Observer {
 
     public void doMove(Move move) {
         draughtsEngine.doMove(move);
-        draughtsEngine.printChessboard();
+        //draughtsEngine.printChessboard();
         currentMove = null;
     }
 

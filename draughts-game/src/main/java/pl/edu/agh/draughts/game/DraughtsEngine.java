@@ -22,7 +22,7 @@ public class DraughtsEngine extends Observable {
 
     public void initializeGame() {
         this.chessboard = new Chessboard();
-        System.out.println(this.chessboard);
+        //printChessboard();
         currentPlayerColor = PieceColor.WHITE;
         gameResult = GameResult.PENDING;
     }
@@ -47,7 +47,7 @@ public class DraughtsEngine extends Observable {
             }
             move.doMove(chessboard);
         }
-        System.out.println(this.chessboard);
+        //printChessboard();
         return gameResult;
     }
 
