@@ -17,10 +17,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
-import pl.edu.agh.draughts.ai.RandomPlayer;
-import pl.edu.agh.draughts.ai.SmartPlayer;
+import pl.edu.agh.draughts.ai.AIPlayer;
 import pl.edu.agh.draughts.game.DraughtsEngine;
 import pl.edu.agh.draughts.game.elements.Chessboard;
+import pl.edu.agh.draughts.game.elements.Player;
 
 public class DraughtsMain {
     
@@ -64,8 +64,7 @@ public class DraughtsMain {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new JDialog(frame, "New game");
-                
+                NewGameCreator.createNewGame();
             }
         });
         JMenuItem end = new JMenuItem("End");
@@ -91,8 +90,9 @@ public class DraughtsMain {
         frame.setVisible(true);
     }
     
-    private static void createAndAddMouseListenersAndControler() {
-        ChessboardMouseListener chessboardMouseListener = new ChessboardMouseListener();
+    private static void createAndAddMouseListenersAndControler(boolean isWhiteControllable, boolean isBlackControllable) {
+        ChessboardMouseListener chessboardMouseListener = new ChessboardMouseListener(isWhiteControllable,
+                isBlackControllable);
         chessboard.addMouseListener(chessboardMouseListener);
         chessboard.addMouseMotionListener(chessboardMouseListener);
         chessboardMouseListener.setChessboardPanel(chessboard);
@@ -110,14 +110,22 @@ public class DraughtsMain {
         addInformationPanel(frame);
         addMenuBar(frame);
         addStatusBar(frame);
-//        draughtsEngine.setBlackPlayer(new RandomPlayer(1000));
-        draughtsEngine.setBlackPlayer(new SmartPlayer(5));
-        draughtsEngine.initializeGame();
-        chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
-        createAndAddMouseListenersAndControler();
         showFrame(frame);
     }
     
+    public static void startNewGame(Player white, Player black) {
+        if (white instanceof AIPlayer) {
+            draughtsEngine.setWhitePlayer((AIPlayer) white);
+        }
+        if (black instanceof AIPlayer) {
+            draughtsEngine.setBlackPlayer((AIPlayer) black);
+        }
+        draughtsEngine.initializeGame();
+        chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
+        createAndAddMouseListenersAndControler(white.isUserControllable(), black.isUserControllable());
+        showFrame(frame);
+    }
+
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override

@@ -28,4 +28,8 @@ public class SmartPlayer implements AIPlayer {
         return MinMax.getMinMaxMove(chessboard, pieceColor, parametersVector, depth);
     }
 
+    @Override
+    public boolean isUserControllable() {
+        return false;
+    }
 }
