@@ -12,7 +12,9 @@ import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
@@ -69,7 +71,27 @@ public class DraughtsMain {
             }
         });
         JMenuItem end = new JMenuItem("End");
+        end.addActionListener(new ActionListener() {
+            
+           private JFrame frame;
+           
+           public ActionListener init(JFrame frame) {
+               this.frame = frame;
+               return this;
+           }
+           
+           @Override
+            public void actionPerformed(ActionEvent e) {
+               int choice = JOptionPane.showConfirmDialog(frame, "Do you really want to exit?",
+                       "Exit", JOptionPane.YES_NO_OPTION);
+               if(choice == JOptionPane.YES_OPTION) {
+                   System.exit(0);
+               }
+                
+            } 
+        }.init(frame));
         gameMenu.add(newGame);
+        gameMenu.add(new JSeparator());
         gameMenu.add(end);
         jMenuBar.add(gameMenu);
         frame.setJMenuBar(jMenuBar);
