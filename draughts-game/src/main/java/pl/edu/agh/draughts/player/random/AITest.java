@@ -12,11 +12,12 @@ public class AITest {
 
     private int blackWonTimes = 0;
     private int whiteWonTimes = 0;
+    private int draws = 0;
     
     public void test() {
         for (int i = 0; i < 100; i++) {
             DraughtsEngine draughtsEngine = new DraughtsEngine();
-            draughtsEngine.setWhitePlayer(new SmartPlayer(3));
+            draughtsEngine.setWhitePlayer(new SmartPlayer(2));
             draughtsEngine.setBlackPlayer(new RandomPlayer(0));
             draughtsEngine.initializeGame();
             GameResult result = draughtsEngine.testGame();
@@ -24,9 +25,11 @@ public class AITest {
                 blackWonTimes++;
             } else if (result == GameResult.WHITE_WON) {
                 whiteWonTimes++;
+            } else if(result == GameResult.DRAW) {
+                draws++;
             }
         }
-        System.out.println("Black: " + blackWonTimes + " white: " + whiteWonTimes);
+        System.out.println("Black: " + blackWonTimes + " white: " + whiteWonTimes + " draws: " + draws);
     }
 
     /**

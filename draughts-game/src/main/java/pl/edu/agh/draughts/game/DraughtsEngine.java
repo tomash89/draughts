@@ -18,6 +18,8 @@ public class DraughtsEngine extends Observable {
     private AIPlayer whitePlayer;
     private AIPlayer blackPlayer;
     private GameResult gameResult;
+    private int lastNumberOfPieces = 0;
+    private int durationOfNumber = 0;
     private final ScheduledThreadPoolExecutor aiExecutor = new ScheduledThreadPoolExecutor(1);
 
     public void initializeGame() {
@@ -25,6 +27,8 @@ public class DraughtsEngine extends Observable {
         //printChessboard();
         currentPlayerColor = PieceColor.WHITE;
         gameResult = GameResult.PENDING;
+        lastNumberOfPieces = 0;
+        durationOfNumber = 0;
     }
 
     public List<Move> getPossibleMoves(PieceColor pieceColor) {
@@ -40,15 +44,37 @@ public class DraughtsEngine extends Observable {
                 break;
             }
             move.doMove(chessboard);
+            if(chceckIfDrawConditions()) {
+                gameResult = GameResult.DRAW;
+                break;
+            }
             move = blackPlayer.suggestMove(chessboard, PieceColor.BLACK);
             if(move == null) {
                 gameResult = GameResult.WHITE_WON;
                 break;
             }
             move.doMove(chessboard);
+            if(chceckIfDrawConditions()) {
+                gameResult = GameResult.DRAW;
+                break;
+            }
         }
         //printChessboard();
         return gameResult;
+    }
+    
+    private boolean chceckIfDrawConditions() {
+        int numberOfPieces = chessboard.getPiecesCount();
+        if(numberOfPieces == lastNumberOfPieces) {
+            durationOfNumber++;
+        } else {
+            lastNumberOfPieces = numberOfPieces;
+            durationOfNumber = 0;
+        }
+        if(durationOfNumber >= 15) {
+            return true;
+        }
+        return false;
     }
 
     public void tryToMoveAutomatically() {
