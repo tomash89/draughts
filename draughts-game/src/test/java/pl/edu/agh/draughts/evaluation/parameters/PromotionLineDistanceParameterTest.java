@@ -20,11 +20,13 @@ public class PromotionLineDistanceParameterTest extends ParameterTest {
 	private PromotionLineDistanceParameter promotionLineDistanceParameter;
 	private int initialPromotionLineDistance;
 
+	private static final int MAX_PROMOTION_LINE_DISTANCE = 4 * (5 + 6 + 7);
+
 	@Before
 	public void setUp() {
 		draughtsEngine = new DraughtsEngine();
 		draughtsEngine.initializeGame();
-		initialPromotionLineDistance = (Chessboard.CHESSBOARD_SIZE
+		initialPromotionLineDistance = MAX_PROMOTION_LINE_DISTANCE - (Chessboard.CHESSBOARD_SIZE
 				- Chessboard.INITIAL_PAWNS__ROWS_COUNT + 1)
 				* Chessboard.INITIAL_PAWNS__ROWS_COUNT
 				* Chessboard.CHESSBOARD_SIZE / 2;
