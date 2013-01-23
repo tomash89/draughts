@@ -30,6 +30,26 @@ public class DraughtsEngine extends Observable {
     public List<Move> getPossibleMoves(PieceColor pieceColor) {
         return chessboard.getPossibleMoves(pieceColor);
     }
+    
+    public GameResult testGame() {
+        Move move = null;
+        while(gameResult == GameResult.PENDING) {
+            move = whitePlayer.suggestMove(chessboard, PieceColor.WHITE);
+            if(move == null) {
+                gameResult = GameResult.BLACK_WON;
+                break;
+            }
+            move.doMove(chessboard);
+            move = blackPlayer.suggestMove(chessboard, PieceColor.BLACK);
+            if(move == null) {
+                gameResult = GameResult.WHITE_WON;
+                break;
+            }
+            move.doMove(chessboard);
+        }
+        System.out.println(this.chessboard);
+        return gameResult;
+    }
 
     public void tryToMoveAutomatically() {
         AIPlayer currentPlayer;

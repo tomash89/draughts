@@ -59,7 +59,7 @@ public class Move {
             piece = new King(piece.getPieceColor());
             chessboard.movePiece(pieceRow, pieceColumn, piece);
 
-            System.out.println("New king!");
+            //System.out.println("New king!");
         }
     }
 
