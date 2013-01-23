@@ -114,16 +114,24 @@ public class DraughtsMain {
     }
     
     public static void startNewGame(Player white, Player black) {
+        chessboard.setVisible(false);
+        chessboard.clearPieces();
         if (white instanceof AIPlayer) {
             draughtsEngine.setWhitePlayer((AIPlayer) white);
+        } else {
+            draughtsEngine.setWhitePlayer(null);
         }
         if (black instanceof AIPlayer) {
             draughtsEngine.setBlackPlayer((AIPlayer) black);
+        } else {
+            draughtsEngine.setBlackPlayer(null);
         }
         draughtsEngine.initializeGame();
         chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
+        chessboard.setVisible(true);
         createAndAddMouseListenersAndControler(white.isUserControllable(), black.isUserControllable());
         showFrame(frame);
+        draughtsEngine.tryToMoveAutomatically();
     }
 
     public static void main(String[] args) {
