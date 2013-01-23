@@ -31,6 +31,10 @@ public class DraughtsEngine extends Observable {
         durationOfNumber = 0;
     }
 
+    public List<Move> getPossibleMoves() {
+        return chessboard.getPossibleMoves(currentPlayerColor);
+    }
+    
     public List<Move> getPossibleMoves(PieceColor pieceColor) {
         return chessboard.getPossibleMoves(pieceColor);
     }
@@ -92,9 +96,16 @@ public class DraughtsEngine extends Observable {
     public void doMove(Move move) {
         if (move != null) {
             move.doMove(this.chessboard);
+            if(chceckIfDrawConditions()) {
+                gameResult = GameResult.DRAW;
+                System.out.println("Draw");
+                setChanged();
+                notifyObservers(gameResult);
+                return;
+            }
             this.currentPlayerColor = currentPlayerColor.getOpponentColor();
             setChanged();
-            notifyObservers();
+            notifyObservers(currentPlayerColor.name() + " player turn.");
             tryToMoveAutomatically();
         } else {
             if (currentPlayerColor == PieceColor.BLACK) {

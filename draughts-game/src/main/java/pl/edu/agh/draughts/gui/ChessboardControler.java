@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 
 import pl.edu.agh.draughts.game.DraughtsEngine;
 import pl.edu.agh.draughts.game.elements.ChessboardPosition;
+import pl.edu.agh.draughts.game.elements.GameResult;
 import pl.edu.agh.draughts.game.elements.King;
 import pl.edu.agh.draughts.game.elements.Move;
 import pl.edu.agh.draughts.game.elements.Pawn;
@@ -39,7 +40,7 @@ public class ChessboardControler implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, final Object arg) {
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -47,6 +48,13 @@ public class ChessboardControler implements Observer {
                 chessboardPanel.setVisible(false);
                 chessboardPanel.clearPieces();
                 chessboardPanel.addPieces(draughtsEngine.getChessboard().getChessboardTable());
+                if(arg instanceof GameResult) {
+                    GameResult gameResult = (GameResult) arg;
+                    DraughtsMain.setStatusBarText(gameResult.getDescription());
+                } 
+                if(arg instanceof String) {
+                    DraughtsMain.setStatusBarText((String)arg);
+                }
                 chessboardPanel.setVisible(true);
             }
         });
@@ -59,7 +67,7 @@ public class ChessboardControler implements Observer {
     }
 
     public ChessboardAction testMove(PieceLabel piece, ChessboardCell cell) {
-        List<Move> possibleMoves = draughtsEngine.getPossibleMoves(piece.getColor());
+        List<Move> possibleMoves = draughtsEngine.getPossibleMoves();
         createOrUpdadeCurrentMove(piece, cell);
         if (currentMove == null) {
             return ChessboardAction.ROLLBACK; // invalid part of the move, rollback everything

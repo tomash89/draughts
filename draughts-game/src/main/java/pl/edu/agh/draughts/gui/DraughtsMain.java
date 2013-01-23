@@ -27,6 +27,7 @@ public class DraughtsMain {
     private static DraughtsEngine draughtsEngine = new DraughtsEngine();
     private static ChessboardPanel chessboard;
     private static JFrame frame;
+    private static JLabel statusLabel;
 
     private static void tryToSetSystemLookAndFeel() {
         try {
@@ -80,7 +81,7 @@ public class DraughtsMain {
         frame.add(statusPanel, BorderLayout.SOUTH);
         statusPanel.setPreferredSize(new Dimension(frame.getWidth(), 16));
         statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
-        JLabel statusLabel = new JLabel("status");
+        statusLabel = new JLabel("");
         statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
         statusPanel.add(statusLabel);
     }
@@ -111,6 +112,10 @@ public class DraughtsMain {
         addMenuBar(frame);
         addStatusBar(frame);
         showFrame(frame);
+    }
+    
+    public static void setStatusBarText(String message) {
+        statusLabel.setText(message);
     }
     
     public static void startNewGame(Player white, Player black) {
