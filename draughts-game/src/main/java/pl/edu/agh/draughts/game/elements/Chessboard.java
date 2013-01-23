@@ -44,6 +44,18 @@ public class Chessboard {
 			}
 		}
 	}
+	
+	public int getPiecesCount() {
+	    int count = 0;
+	    for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+            for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                if(this.chessboardTable[i][j] != null) {
+                    count++;
+                }
+            }
+	    }
+	    return count;
+	}
 
 	@Override
 	public String toString() {
