@@ -22,7 +22,7 @@ import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 
 public class ParametersVector {
     private final List<ParameterWeightPair> parameters = new ArrayList<ParameterWeightPair>();
-
+    
     public static ParametersVector getAllParametersVector() {
         ParametersVector parametersVector = new ParametersVector();
         parametersVector.addParameter(new AttackingPawnsNumberParameter(), 1.0);
@@ -52,10 +52,15 @@ public class ParametersVector {
         parameters.add(parameterWeightPair);
     }
 
-    public double calculateValue(Chessboard chessboard, PieceColor pieceColor) throws InvalidPieceException {
+    public double calculateValue(Chessboard chessboard, PieceColor pieceColor) {
         double sum = 0.0;
+        try {
         for (ParameterWeightPair parameterWeightPair : parameters) {
             sum += parameterWeightPair.calculateValue(chessboard, pieceColor);
+        }
+        } catch (InvalidPieceException e) {
+            e.printStackTrace(System.err);
+            return Double.NEGATIVE_INFINITY;
         }
         return sum;
     }

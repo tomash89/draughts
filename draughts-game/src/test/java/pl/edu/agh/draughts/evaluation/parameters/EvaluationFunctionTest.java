@@ -18,6 +18,13 @@ public class EvaluationFunctionTest extends ParameterTest {
 	private DraughtsEngine draughtsEngine;
 	private EvaluationFunction evaluationFunction;
 
+	private static final int MAX_PROMOTION_LINE_DISTANCE = 4 * (5 + 6 + 7);
+
+	private double result;
+	
+	private double distanceWeight = 3.0;
+	private double pawnWeight = 2.0;
+	
 	@Before
 	public void setUp() {
 		draughtsEngine = new DraughtsEngine();
@@ -32,15 +39,17 @@ public class EvaluationFunctionTest extends ParameterTest {
 		draughtsEngine.getChessboard().getChessboardTable()[2][0] = null;
 		draughtsEngine.getChessboard().getChessboardTable()[3][1] = whitePawnMock;
 
+		draughtsEngine.printChessboard();
+		result = distanceWeight;
 	}
 
 	@Test
 	public void testCalculateValue() {
 		try {
 			assertTrue(evaluationFunction.calculateValue(
-					draughtsEngine.getChessboard(), PieceColor.WHITE) == -3.0);
+					draughtsEngine.getChessboard(), PieceColor.WHITE) == result);
 			assertTrue(evaluationFunction.calculateValue(
-					draughtsEngine.getChessboard(), PieceColor.BLACK) == 3.0);
+					draughtsEngine.getChessboard(), PieceColor.BLACK) == -1.0 * result);
 		} catch (InvalidPieceException e) {
 			fail();
 		}

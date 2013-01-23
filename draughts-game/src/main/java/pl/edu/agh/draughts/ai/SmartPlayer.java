@@ -10,37 +10,22 @@ import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 public class SmartPlayer implements AIPlayer {
 
     private final ParametersVector parametersVector = ParametersVector.getAllParametersVector();
-    private final int delay;
+    private final int depth;
 
-    public SmartPlayer(int delay) {
-        this.delay = delay;
+    public SmartPlayer(int depth) {
+        this.depth = depth;
     }
 
     @Override
     public Move suggestMove(Chessboard chessboard, PieceColor pieceColor) {
-        List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace(System.err);
-        }
-        Double bestValue = null;
-        Move bestMove = null;
-        for (Move move : possibleMoves) {
-            Chessboard evaluationChessboard = new Chessboard(chessboard);
-            Move copyMove = move.copyOf();
-            copyMove.doMove(evaluationChessboard);
-            try {
-                double value = parametersVector.calculateValue(evaluationChessboard, pieceColor);
-                if (bestValue == null || value > bestValue) {
-                    bestMove = move;
-                    bestValue = value;
-                }
-            } catch (InvalidPieceException e) {
-                e.printStackTrace(System.err);
-            }
-        }
-        return bestMove;
+        
+//        try {
+//            Thread.sleep(delay);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace(System.err);
+//        }
+        
+        return MinMax.getMinMaxMove(chessboard, pieceColor, parametersVector, depth);
     }
 
     @Override

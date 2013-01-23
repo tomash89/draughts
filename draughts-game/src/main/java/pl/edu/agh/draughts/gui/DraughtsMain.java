@@ -120,10 +120,8 @@ public class DraughtsMain {
         if (black instanceof AIPlayer) {
             draughtsEngine.setBlackPlayer((AIPlayer) black);
         }
-        System.out.println("TU1");
         draughtsEngine.initializeGame();
         chessboard.addPieces(draughtsEngine.getChessboard().getChessboardTable());
-        System.out.println("TU2");
         createAndAddMouseListenersAndControler(white.isUserControllable(), black.isUserControllable());
         showFrame(frame);
     }
