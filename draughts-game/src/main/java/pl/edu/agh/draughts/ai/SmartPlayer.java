@@ -43,4 +43,8 @@ public class SmartPlayer implements AIPlayer {
         return bestMove;
     }
 
+    @Override
+    public boolean isUserControllable() {
+        return false;
+    }
 }

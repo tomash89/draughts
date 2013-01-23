@@ -8,6 +8,8 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLayeredPane;
 
+import pl.edu.agh.draughts.game.elements.PieceColor;
+
 public class ChessboardMouseListener extends MouseAdapter implements MouseMotionListener {
 
     private ChessboardPanel chessboardPanel;
@@ -17,6 +19,13 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
     private int xAdjustment;
     private int yAdjustment;
     private ChessboardCell highlightedCell;
+    private final boolean isWhiteControllable;
+    private final boolean isBlackControllable;
+
+    public ChessboardMouseListener(boolean isWhiteControllable, boolean isBlackControllable) {
+        this.isWhiteControllable = isWhiteControllable;
+        this.isBlackControllable = isBlackControllable;
+    }
 
     public ChessboardPanel getChessboardPanel() {
         return chessboardPanel;
@@ -40,13 +49,17 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
         Component c = chessboardPanel.findComponentAt(e.getX(), e.getY());
 
         if (c instanceof PieceLabel) {
-            Point parentLocation = c.getParent().getLocation();
-            xAdjustment = parentLocation.x - e.getX();
-            yAdjustment = parentLocation.y - e.getY();
-            chessPiece = (PieceLabel) c;
-            chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
-            chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
-            ((JLayeredPane) chessboardPanel.getParent().getParent()).add(chessPiece, JLayeredPane.DRAG_LAYER);
+            PieceLabel pieceLabel = (PieceLabel) c;
+            if (((pieceLabel.getColor() == PieceColor.WHITE) && isWhiteControllable)
+                    || ((pieceLabel.getColor() == PieceColor.BLACK) && isBlackControllable)) {
+                Point parentLocation = c.getParent().getLocation();
+                xAdjustment = parentLocation.x - e.getX();
+                yAdjustment = parentLocation.y - e.getY();
+                chessPiece = pieceLabel;
+                chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
+                chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
+                ((JLayeredPane) chessboardPanel.getParent().getParent()).add(chessPiece, JLayeredPane.DRAG_LAYER);
+            }
         }
     }
 

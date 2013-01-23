@@ -31,4 +31,9 @@ public class RandomPlayer implements AIPlayer {
         return null;
     }
 
+    @Override
+    public boolean isUserControllable() {
+        return false;
+    }
+
 }
