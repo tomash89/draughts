@@ -8,9 +8,21 @@ import pl.edu.agh.draughts.game.elements.PieceColor;
 import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 
 public class MinMax {
+    static class BestMoveHolder {
+        private Move bestMove;
+        
+        public Move getBestMove() {
+            return bestMove;
+        }
+        
+        public void setBestMove(Move bestMove) {
+            this.bestMove = bestMove;
+        }
+    }
+    
     public static Move getMinMaxMove(Chessboard chessboard, PieceColor pieceColor, ParametersVector parametersVector, int callsLimit) {
         List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
-        if(possibleMoves.isEmpty() || callsLimit == 0) {
+        if(possibleMoves.isEmpty()) {
             return null;
         }
         Double maxValue = null;
@@ -19,7 +31,8 @@ public class MinMax {
             Chessboard evaluationChessboard = new Chessboard(chessboard);
             Move copyMove = move.copyOf();
             copyMove.doMove(evaluationChessboard);
-            double value = getMaxMoveValue(chessboard, pieceColor.getOpponentColor(), parametersVector, callsLimit - 1);
+            BestMoveHolder bestMoveHolder = new BestMoveHolder();
+            double value = getMaxMoveValue(evaluationChessboard, pieceColor.getOpponentColor(), parametersVector, callsLimit - 1, bestMoveHolder);
             if (maxValue == null || value > maxValue) {
                 maxMove = move;
                 maxValue = value;
@@ -28,23 +41,25 @@ public class MinMax {
         return maxMove;
     }
     
-    public static double getMaxMoveValue(Chessboard chessboard, PieceColor pieceColor, ParametersVector parametersVector, int callsLimit) {
-        List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
-        if(possibleMoves.isEmpty() || callsLimit == 0) {
+    public static double getMaxMoveValue(Chessboard chessboard, PieceColor pieceColor, ParametersVector parametersVector, int callsLimit, BestMoveHolder bestMoveHolder) {
+        if(callsLimit <= 0) {
             Chessboard evaluationChessboard = new Chessboard(chessboard);
-            return parametersVector.calculateValue(evaluationChessboard, pieceColor);
+            return parametersVector.calculateValue(evaluationChessboard, pieceColor.getOpponentColor());
+        }
+        List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
+        if(possibleMoves.isEmpty()) {
+            return Integer.MAX_VALUE;
         }
         Double maxValue = null;
         for (Move move : possibleMoves) {
             Chessboard evaluationChessboard = new Chessboard(chessboard);
             Move copyMove = move.copyOf();
             copyMove.doMove(evaluationChessboard);
-            double value = getMaxMoveValue(chessboard, pieceColor.getOpponentColor(), parametersVector, callsLimit - 1);
+            double value = getMaxMoveValue(chessboard, pieceColor.getOpponentColor(), parametersVector, callsLimit - 1, bestMoveHolder);
             if (maxValue == null || value > maxValue) {
                 maxValue = value;
             }
         }
         return maxValue;
     }
-    
 }

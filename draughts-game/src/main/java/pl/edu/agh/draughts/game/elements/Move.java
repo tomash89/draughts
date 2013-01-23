@@ -54,8 +54,8 @@ public class Move {
             chessboard.movePiece(pieceRow, pieceColumn, piece);
         }
 
-        if ((piece.getPieceColor().equals(PieceColor.WHITE) && pieceRow == Chessboard.CHESSBOARD_SIZE - 1)
-                || (piece.getPieceColor().equals(PieceColor.BLACK) && pieceRow == 0)) {
+        if (piece instanceof Pawn && ((piece.getPieceColor().equals(PieceColor.WHITE) && pieceRow == Chessboard.CHESSBOARD_SIZE - 1)
+                || (piece.getPieceColor().equals(PieceColor.BLACK) && pieceRow == 0))) {
             piece = new King(piece.getPieceColor());
             chessboard.movePiece(pieceRow, pieceColumn, piece);
 

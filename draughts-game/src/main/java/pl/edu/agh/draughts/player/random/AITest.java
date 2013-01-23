@@ -26,10 +26,10 @@ public class AITest implements Observer {
     }
 
     public void test() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1; i++) {
             DraughtsEngine draughtsEngine = new DraughtsEngine();
             draughtsEngine.addObserver(this);
-            draughtsEngine.setWhitePlayer(new SmartPlayer(3));
+            draughtsEngine.setWhitePlayer(new SmartPlayer(5));
             draughtsEngine.setBlackPlayer(new RandomPlayer(0));
             draughtsEngine.initializeGame();
             draughtsEngine.tryToMoveAutomatically();
