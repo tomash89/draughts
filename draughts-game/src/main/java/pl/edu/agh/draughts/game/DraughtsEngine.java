@@ -24,7 +24,7 @@ public class DraughtsEngine extends Observable {
 
     public void initializeGame() {
         this.chessboard = new Chessboard();
-        System.out.println(this.chessboard);
+        //printChessboard();
         currentPlayerColor = PieceColor.WHITE;
         gameResult = GameResult.PENDING;
         lastNumberOfPieces = 0;
@@ -63,7 +63,7 @@ public class DraughtsEngine extends Observable {
                 break;
             }
         }
-        System.out.println(this.chessboard);
+        //printChessboard();
         return gameResult;
     }
     

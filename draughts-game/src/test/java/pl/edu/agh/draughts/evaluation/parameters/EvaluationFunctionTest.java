@@ -39,7 +39,7 @@ public class EvaluationFunctionTest extends ParameterTest {
 		draughtsEngine.getChessboard().getChessboardTable()[2][0] = null;
 		draughtsEngine.getChessboard().getChessboardTable()[3][1] = whitePawnMock;
 
-		draughtsEngine.printChessboard();
+		//draughtsEngine.printChessboard();
 		result = distanceWeight;
 	}
 

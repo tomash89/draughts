@@ -22,7 +22,7 @@ public class RandomPlayer {
 			int moveSelection = random.nextInt(possibleMoves.size());
 			draughtsEngine.doMove(possibleMoves.get(moveSelection));
 			move = (move + 1) % 2;
-			draughtsEngine.printChessboard();
+			//draughtsEngine.printChessboard();
 			possibleMoves = draughtsEngine.getPossibleMoves(pieceColors[move]);
 		}
 	}

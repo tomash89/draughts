@@ -39,7 +39,7 @@ public class DraughtsEngineTest {
         chessboardTable[3][3] = new Pawn(PieceColor.BLACK);
         chessboardTable[5][1] = new Pawn(PieceColor.BLACK);
         chessboardTable[4][2] = new Pawn(PieceColor.WHITE);
-        draughtsEngine.printChessboard();
+        //draughtsEngine.printChessboard();
 
         draughtsEngine.doMove(draughtsEngine.getPossibleMoves(PieceColor.WHITE).get(0));
 

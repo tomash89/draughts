@@ -1,14 +1,13 @@
-#Wed Jan 23 21:02:39 CET 2013
-pl.edu.agh.draughts.evaluation.parameters.PromotionLineDistanceParameter=0.4453099082181943
-pl.edu.agh.draughts.evaluation.parameters.SafeKingsNumberParameter=0.501538791227269
-pl.edu.agh.draughts.evaluation.parameters.CentrallyPositionedKingsParameter=0.4671495341130453
-pl.edu.agh.draughts.evaluation.parameters.KingNumberParameter=0.5033760089512613
-pl.edu.agh.draughts.evaluation.parameters.SafePawnsNumberParameter=0.6075961382405659
-pl.edu.agh.draughts.evaluation.parameters.CentrallyPositionedPawnsParameter=0.4638008840279091
-pl.edu.agh.draughts.evaluation.parameters.LonerKingsNumberParameter=0.4398674236891394
-pl.edu.agh.draughts.evaluation.parameters.AttackingPawnsNumberParameter=0.5637906369051662
-pl.edu.agh.draughts.evaluation.parameters.LonerPawnsNumberParameter=0.4738743773802082
-pl.edu.agh.draughts.evaluation.parameters.PromotionLineUnoccupiedFieldsParameter=0.4074711141712061
-pl.edu.agh.draughts.evaluation.parameters.TriangleParameter=0.36426698971270466
-pl.edu.agh.draughts.evaluation.parameters.PawnNumberParameter=0.4784405247964318
-pl.edu.agh.draughts.evaluation.parameters.DefenderPiecesNumberParameter=0.529351976868834
+#Wed Jan 23 23:14:21 CET 2013
+pl.edu.agh.draughts.evaluation.parameters.PromotionLineDistanceParameter=0.5250290988590544
+pl.edu.agh.draughts.evaluation.parameters.SafeKingsNumberParameter=0.4156619789095539
+pl.edu.agh.draughts.evaluation.parameters.CentrallyPositionedKingsParameter=0.5475033793440124
+pl.edu.agh.draughts.evaluation.parameters.KingNumberParameter=0.4578374265415577
+pl.edu.agh.draughts.evaluation.parameters.SafePawnsNumberParameter=0.5300188445716066
+pl.edu.agh.draughts.evaluation.parameters.CentrallyPositionedPawnsParameter=0.5147073623864871
+pl.edu.agh.draughts.evaluation.parameters.LonerKingsNumberParameter=0.5141804143013087
+pl.edu.agh.draughts.evaluation.parameters.AttackingPawnsNumberParameter=0.4672367405540132
+pl.edu.agh.draughts.evaluation.parameters.LonerPawnsNumberParameter=0.4918551201055665
+pl.edu.agh.draughts.evaluation.parameters.PromotionLineUnoccupiedFieldsParameter=0.22679982545602717
+pl.edu.agh.draughts.evaluation.parameters.PawnNumberParameter=0.46583521460122124
+pl.edu.agh.draughts.evaluation.parameters.DefenderPiecesNumberParameter=0.46249414926458005
