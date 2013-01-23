@@ -13,8 +13,11 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.TreeMap;
 
+import pl.edu.agh.draughts.ai.SmartPlayer;
 import pl.edu.agh.draughts.evaluation.parameters.EvaluationFunction;
 import pl.edu.agh.draughts.evaluation.parameters.IEvaluationParameter;
+import pl.edu.agh.draughts.game.DraughtsEngine;
+import pl.edu.agh.draughts.game.elements.GameResult;
 
 /**
  * 
@@ -41,8 +44,8 @@ public class EvolutionaryAlgorithm {
 
 	private static final boolean PRESERVE_WINNER = true;
 
-	private static final int PREDICTED_STEPS_COUNT = 3;
-	
+	private static final int PREDICTED_STEPS_COUNT = 2;
+
 	private ICrossoverFunction crossoverFunction = new AvgCrossoverFunction();
 
 	private IMutationOperator mutationOperator = new UniformMutationOperator();
@@ -126,15 +129,28 @@ public class EvolutionaryAlgorithm {
 
 	public EvaluationFunction play(EvaluationFunction evaluationFunction1,
 			EvaluationFunction evaluationFunction2) {
-		// TODO
-		int selection = RANDOM.nextInt() % 3;
-		if (selection == 0) {
-			return null;
-		} else if (selection == 1) {
-			return evaluationFunction1;
+		int whiteSelection = RANDOM.nextInt() % 2;
+		EvaluationFunction whitePlayer, blackPlayer;
+		DraughtsEngine draughtsEngine = new DraughtsEngine();
+		if (whiteSelection == 0) {
+			whitePlayer = evaluationFunction1;
+			blackPlayer = evaluationFunction2;
 		} else {
-			return evaluationFunction2;
+			whitePlayer = evaluationFunction2;
+			blackPlayer = evaluationFunction1;
 		}
+		draughtsEngine.setWhitePlayer(new SmartPlayer(PREDICTED_STEPS_COUNT, whitePlayer));
+		draughtsEngine.setBlackPlayer(new SmartPlayer(PREDICTED_STEPS_COUNT, blackPlayer));
+		draughtsEngine.initializeGame();
+		GameResult result = draughtsEngine.testGame();
+		if (result == GameResult.BLACK_WON) {
+			return blackPlayer;
+		} else if (result == GameResult.WHITE_WON) {
+			return whitePlayer;
+		} else if (result == GameResult.DRAW) {
+			return null;
+		}
+		return null;
 	}
 
 	public void createNextPopulation(Map<EvaluationFunction, Integer> evaluation) {

@@ -1,5 +1,10 @@
 package pl.edu.agh.draughts.evaluation.parameters;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -48,8 +53,9 @@ public class EvaluationFunction implements IEvaluationParameter {
 				.keySet()) {
 			result += evaluationFunctionParameters.get(evaluationParameter)
 					* (evaluationParameter.calculateValue(chessboard,
-							pieceColor) - evaluationParameter.calculateValue(
-							chessboard, opponentColor));
+							pieceColor)); // -
+											// evaluationParameter.calculateValue(chessboard,
+											// opponentColor));
 		}
 		return result;
 	}
@@ -63,5 +69,68 @@ public class EvaluationFunction implements IEvaluationParameter {
 							.toString());
 		}
 		return properties;
+	}
+
+	public static EvaluationFunction getAllParametersEvaluationFunction() {
+		EvaluationFunction evaluationFunction = new EvaluationFunction();
+		Map<IEvaluationParameter, Double> parameters = new HashMap<IEvaluationParameter, Double>();
+
+		parameters.put(new AttackingPawnsNumberParameter(), 1.0);
+		parameters.put(new CentrallyPositionedKingsParameter(), 1.0);
+		parameters.put(new CentrallyPositionedPawnsParameter(), 1.0);
+		parameters.put(new DefenderPiecesNumberParameter(), 1.0);
+		parameters.put(new KingNumberParameter(), 1.0);
+		parameters.put(new LonerKingsNumberParameter(), 1.0);
+		parameters.put(new LonerPawnsNumberParameter(), 1.0);
+		parameters.put(new PawnNumberParameter(), 1.0);
+		parameters.put(new PromotionLineDistanceParameter(), 1.0);
+		parameters.put(new PromotionLineUnoccupiedFieldsParameter(), 1.0);
+		parameters.put(new SafeKingsNumberParameter(), 1.0);
+		parameters.put(new SafePawnsNumberParameter(), 1.0);
+		// parameters.put(new TriangleParameter(), 1.0);
+
+		evaluationFunction.setEvaluationFunctionParameters(parameters);
+
+		return evaluationFunction;
+	}
+
+	public EvaluationFunction() {
+
+	}
+
+	public EvaluationFunction(String fileName) {
+		Properties properties = new Properties();
+		Map<IEvaluationParameter, Double> parameters = new HashMap<IEvaluationParameter, Double>();
+		try {
+			properties.load(new FileReader(new File(fileName)));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+
+		for (Object className : properties.keySet()) {
+			try {
+				IEvaluationParameter evaluationParameter = (IEvaluationParameter) Class
+						.forName((String) className).newInstance();
+				double weight = Double.parseDouble((String) properties
+						.get(className));
+				parameters.put(evaluationParameter, weight);
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		this.setEvaluationFunctionParameters(parameters);
 	}
 }
