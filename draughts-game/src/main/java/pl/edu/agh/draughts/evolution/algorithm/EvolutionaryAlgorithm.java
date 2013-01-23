@@ -49,6 +49,7 @@ public class EvolutionaryAlgorithm {
 		prepareInitialPopulation(evaluationFunction);
 		Map<EvaluationFunction, Integer> evaluation = evaluatePopulation();
 		for (int i = 0; i < STEPS_COUNT; i++) {
+			System.out.println("Evolution step " + i + " of " + STEPS_COUNT);
 			createNextPopulation(evaluation);
 			evaluation = evaluatePopulation();
 		}
@@ -92,9 +93,11 @@ public class EvolutionaryAlgorithm {
 		for (EvaluationFunction evaluationFunction : this.population) {
 			evaluation.put(evaluationFunction, 0);
 		}
+		int step = 1;
 		for (EvaluationFunction evaluationFunction : this.population) {
 			Iterator<EvaluationFunction> opponentIterator = this.population
 					.listIterator(this.population.indexOf(evaluationFunction));
+			System.out.println("Strategy number " + step++);
 			while (opponentIterator.hasNext()) {
 				EvaluationFunction opponentEvaluationFunction = opponentIterator
 						.next();
