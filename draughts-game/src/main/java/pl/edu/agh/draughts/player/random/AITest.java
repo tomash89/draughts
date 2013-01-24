@@ -1,5 +1,6 @@
 package pl.edu.agh.draughts.player.random;
 
+import pl.edu.agh.draughts.ai.AIPlayer;
 import pl.edu.agh.draughts.ai.RandomPlayer;
 import pl.edu.agh.draughts.ai.SmartPlayer;
 import pl.edu.agh.draughts.game.DraughtsEngine;
@@ -15,9 +16,10 @@ public class AITest {
 		for (int i = 0; i < 100; i++) {
 			DraughtsEngine draughtsEngine = new DraughtsEngine();
 			// draughtsEngine.setWhitePlayer(new SmartPlayer(2));
-			draughtsEngine.setWhitePlayer(new SmartPlayer(2,
-					"src/main/resources/winner.txt"));
-			draughtsEngine.setBlackPlayer(new RandomPlayer(0));
+			AIPlayer a = new SmartPlayer(25);
+			AIPlayer b = new RandomPlayer(0);
+			draughtsEngine.setWhitePlayer(a);
+			draughtsEngine.setBlackPlayer(b);
 			draughtsEngine.initializeGame();
 			GameResult result = draughtsEngine.testGame();
 			if (result == GameResult.BLACK_WON) {
@@ -28,8 +30,8 @@ public class AITest {
 				draws++;
 			}
 		}
-		System.out.println("Black: " + blackWonTimes + " white: "
-				+ whiteWonTimes + " draws: " + draws);
+		System.out.println("White: " + whiteWonTimes + "\nBlack: "
+				+ blackWonTimes + "\nDraws: " + draws);
 	}
 
 	/**

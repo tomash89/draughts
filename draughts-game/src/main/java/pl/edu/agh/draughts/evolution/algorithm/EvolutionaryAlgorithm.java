@@ -44,7 +44,7 @@ public class EvolutionaryAlgorithm {
 
 	private static final boolean PRESERVE_WINNER = true;
 
-	private static final int PREDICTED_STEPS_COUNT = 2;
+	private static final int PREDICTED_STEPS_COUNT = 15;
 
 	private ICrossoverFunction crossoverFunction = new AvgCrossoverFunction();
 

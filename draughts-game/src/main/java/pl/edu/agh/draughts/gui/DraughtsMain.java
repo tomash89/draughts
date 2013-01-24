@@ -130,7 +130,7 @@ public class DraughtsMain {
         tryToSetSystemLookAndFeel();
         JFrame frame = createNewFrame();
         addChessboard(frame);
-        addInformationPanel(frame);
+        //addInformationPanel(frame);
         addMenuBar(frame);
         addStatusBar(frame);
         showFrame(frame);
