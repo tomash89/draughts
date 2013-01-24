@@ -54,7 +54,11 @@ public class MinMax {
 		}
 		List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
 		if (possibleMoves.isEmpty()) {
-			return Integer.MAX_VALUE;
+		    if(pieceColor == player) {
+		        return Integer.MAX_VALUE;
+		    } else {
+		        return Integer.MIN_VALUE;
+		    }
 		}
 		Double maxValue = null;
 		for (Move move : possibleMoves) {
