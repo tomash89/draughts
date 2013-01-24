@@ -53,9 +53,7 @@ public class EvaluationFunction implements IEvaluationParameter {
 				.keySet()) {
 			result += evaluationFunctionParameters.get(evaluationParameter)
 					* (evaluationParameter.calculateValue(chessboard,
-							pieceColor)); // -
-											// evaluationParameter.calculateValue(chessboard,
-											// opponentColor));
+							pieceColor)- evaluationParameter.calculateValue(chessboard, opponentColor));
 		}
 		return result;
 	}
