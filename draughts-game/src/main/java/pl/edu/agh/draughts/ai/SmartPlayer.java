@@ -28,15 +28,8 @@ public class SmartPlayer implements AIPlayer {
 
 	@Override
 	public Move suggestMove(Chessboard chessboard, PieceColor pieceColor) {
-
-		// try {
-		// Thread.sleep(delay);
-		// } catch (InterruptedException e) {
-		// e.printStackTrace(System.err);
-		// }
-
-		return MinMax.getMinMaxMove(chessboard, pieceColor,
-				this.evaluationFunction, depth);
+	    MinMax minMax = new MinMax(pieceColor);
+		return minMax.getMinMaxMove(chessboard, pieceColor, this.evaluationFunction, depth);
 	}
 
 	@Override
