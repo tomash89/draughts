@@ -51,12 +51,12 @@ public class EvaluationFunction implements IEvaluationParameter {
 		}
 		for (IEvaluationParameter evaluationParameter : this.evaluationFunctionParameters
 				.keySet()) {
-		    float val = evaluationParameter.calculateValue(chessboard,pieceColor);
-		    //System.out.println(pieceColor.name() + ":" +evaluationParameter.getClass().getCanonicalName() + ":"+val);
+			float val = evaluationParameter.calculateValue(chessboard,
+					pieceColor);
+			// System.out.println(pieceColor.name() + ":"
+			// +evaluationParameter.getClass().getCanonicalName() + ":"+val);
 			result += evaluationFunctionParameters.get(evaluationParameter)
-					* val; // -
-											// evaluationParameter.calculateValue(chessboard,
-											// opponentColor));
+					* val;
 		}
 		return result;
 	}

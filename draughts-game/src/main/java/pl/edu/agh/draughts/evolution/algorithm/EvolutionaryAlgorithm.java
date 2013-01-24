@@ -36,7 +36,7 @@ public class EvolutionaryAlgorithm {
 
 	private List<EvaluationFunction> population = null;
 
-	private static final int WINNER_POINTS = 3;
+	private static final int WINNER_POINTS = 10;
 
 	private static final int DRAW_POINTS = 1;
 
