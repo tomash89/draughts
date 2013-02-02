@@ -102,7 +102,7 @@ public class ChessboardMouseListener extends MouseAdapter implements MouseMotion
 
             ChessboardAction returnedAction = chessboardControler.testMove(chessPiece, dropCell);
             if (returnedAction == ChessboardAction.ROLLBACK) {
-                System.err.println("Not a valid move dude!");
+                System.err.println("Not a valid move!");
                 System.err.println(String.format("%s to %s", chessPiece.getChessboardPosition(),
                         dropCell.getChessboardPosition()));
                 rollback = true;

@@ -63,7 +63,7 @@ public class NewGameCreator extends JFrame {
                 } else if(name == RANDOM_PL) {
                     return new RandomPlayer(100);
                 } else if(name == SMART_PL) {
-                    return new SmartPlayer(15, "src/main/resources/winner.txt");
+                    return new SmartPlayer(3, "src/main/resources/winner.txt");
                 }
                 return null;
             }

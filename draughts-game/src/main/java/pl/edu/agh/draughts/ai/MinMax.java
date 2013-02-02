@@ -10,7 +10,7 @@ import pl.edu.agh.draughts.game.exceptions.InvalidPieceException;
 
 public class MinMax {
 
-    private PieceColor player;
+    private final PieceColor player;
 
     public MinMax(PieceColor pieceColor) {
         this.player = pieceColor;
@@ -19,13 +19,17 @@ public class MinMax {
     public Move getMinMaxMove(Chessboard chessboard, PieceColor pieceColor,
             EvaluationFunction evaluationFunction, int callsLimit) {
         List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
+        // System.out.println(possibleMoves.size());
+        // for (Move move : possibleMoves) {
+        // System.out.println(move);
+        // }
         if (possibleMoves.isEmpty()) {
             return null;
         }
         Double maxValue = null;
         Move maxMove = null;
         for (Move move : possibleMoves) {
-            Chessboard evaluationChessboard = new Chessboard(chessboard);
+            Chessboard evaluationChessboard = chessboard.copyOf();
             Move copyMove = move.copyOf();
             copyMove.doMove(evaluationChessboard);
             double value = getMaxMoveValue(evaluationChessboard, pieceColor.getOpponentColor(),
@@ -66,7 +70,7 @@ public class MinMax {
         if (pieceColor == player) {
             Double newAlpha = alpha;
             for (Move move : possibleMoves) {
-                Chessboard evaluationChessboard = new Chessboard(chessboard);
+                Chessboard evaluationChessboard = chessboard.copyOf();
                 Move copyMove = move.copyOf();
                 copyMove.doMove(evaluationChessboard);
                 if (pieceColor == player) {
@@ -84,7 +88,7 @@ public class MinMax {
         } else {
             Double newBeta = beta;
             for (Move move : possibleMoves) {
-                Chessboard evaluationChessboard = new Chessboard(chessboard);
+                Chessboard evaluationChessboard = chessboard.copyOf();
                 Move copyMove = move.copyOf();
                 copyMove.doMove(evaluationChessboard);
                 if (pieceColor == player) {

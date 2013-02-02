@@ -16,7 +16,7 @@ public class AITest {
 		for (int i = 0; i < 100; i++) {
 			DraughtsEngine draughtsEngine = new DraughtsEngine();
 			// draughtsEngine.setWhitePlayer(new SmartPlayer(2));
-			AIPlayer a = new SmartPlayer(25);
+            AIPlayer a = new SmartPlayer(1, "src/main/resources/winner.txt");
 			AIPlayer b = new RandomPlayer(0);
 			draughtsEngine.setWhitePlayer(a);
 			draughtsEngine.setBlackPlayer(b);

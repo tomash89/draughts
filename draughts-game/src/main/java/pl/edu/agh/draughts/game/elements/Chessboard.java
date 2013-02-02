@@ -30,6 +30,10 @@ public class Chessboard {
         }
     }
 
+    public Chessboard copyOf() {
+        return new Chessboard(this);
+    }
+
 	public boolean doMove(Move move) {
 		boolean result = false;
 		return result;

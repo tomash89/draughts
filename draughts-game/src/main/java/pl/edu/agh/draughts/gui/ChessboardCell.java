@@ -54,7 +54,7 @@ public class ChessboardCell extends JPanel {
     }
 
     public void setPiece(PieceLabel piece) {
-        System.out.println("adding piece");
+        // System.out.println("adding piece");
         this.piece = piece;
         add(piece);
     }
