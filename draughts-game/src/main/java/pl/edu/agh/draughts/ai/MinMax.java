@@ -32,13 +32,15 @@ public class MinMax {
             Chessboard evaluationChessboard = chessboard.copyOf();
             Move copyMove = move.copyOf();
             copyMove.doMove(evaluationChessboard);
-            double value = getMaxMoveValue(evaluationChessboard, pieceColor.getOpponentColor(),
-                    evaluationFunction, callsLimit - 1, Double.MIN_VALUE, Double.MAX_VALUE);
-            if (maxValue == null || value > maxValue) {
+            Double value = getMaxMoveValue(evaluationChessboard, pieceColor.getOpponentColor(),
+                    evaluationFunction, callsLimit - 1, -Double.MAX_VALUE, Double.MAX_VALUE);
+            if (value != null && (maxValue == null || value > maxValue)) {
                 maxMove = move;
                 maxValue = value;
             }
         }
+        //System.out.println(maxValue);
+
         return maxMove;
     }
 
@@ -56,15 +58,20 @@ public class MinMax {
 
     public Double getMaxMoveValue(Chessboard chessboard, PieceColor pieceColor,
             EvaluationFunction evaluationFunction, int callsLimit, double alpha, double beta) {
+        // System.out.println(pieceColor + ":" + callsLimit + " limits: " +
+        // alpha + ":" + beta);
         if (callsLimit <= 0) {
-            return evaluatePosition(chessboard, evaluationFunction);
+            double eval = evaluatePosition(chessboard, evaluationFunction);
+            // System.out.println(pieceColor + ":" + eval);
+            return eval;
         }
         List<Move> possibleMoves = chessboard.getPossibleMoves(pieceColor);
         if (possibleMoves.isEmpty()) {
+            //System.out.println(pieceColor.getOpponentColor() + " could be winner!");
             if (pieceColor == player) {
                 return Double.MAX_VALUE;
             } else {
-                return Double.MIN_VALUE;
+                return -Double.MAX_VALUE;
             }
         }
         if (pieceColor == player) {
@@ -73,15 +80,13 @@ public class MinMax {
                 Chessboard evaluationChessboard = chessboard.copyOf();
                 Move copyMove = move.copyOf();
                 copyMove.doMove(evaluationChessboard);
-                if (pieceColor == player) {
-                    Double value = getMaxMoveValue(chessboard, pieceColor.getOpponentColor(),
-                            evaluationFunction, callsLimit - 1, newAlpha, beta);
-                    if (value != null && value > newAlpha) {
-                        newAlpha = value;
-                    }
-                    if (newAlpha >= beta) {
-                        return null;
-                    }
+                Double value = getMaxMoveValue(chessboard, pieceColor.getOpponentColor(),
+                        evaluationFunction, callsLimit - 1, newAlpha, beta);
+                if (value != null && value > newAlpha) {
+                    newAlpha = value;
+                }
+                if (newAlpha >= beta) {
+                    return null;
                 }
             }
             return newAlpha;
@@ -91,15 +96,13 @@ public class MinMax {
                 Chessboard evaluationChessboard = chessboard.copyOf();
                 Move copyMove = move.copyOf();
                 copyMove.doMove(evaluationChessboard);
-                if (pieceColor == player) {
-                    Double value = getMaxMoveValue(chessboard, pieceColor.getOpponentColor(),
-                            evaluationFunction, callsLimit - 1, alpha, newBeta);
-                    if (value != null && value < newBeta) {
-                        newBeta = value;
-                    }
-                    if (newBeta <= alpha) {
-                        return null;
-                    }
+                Double value = getMaxMoveValue(chessboard, pieceColor.getOpponentColor(),
+                        evaluationFunction, callsLimit - 1, alpha, newBeta);
+                if (value != null && value < newBeta) {
+                    newBeta = value;
+                }
+                if (newBeta <= alpha) {
+                    return null;
                 }
             }
             return newBeta;

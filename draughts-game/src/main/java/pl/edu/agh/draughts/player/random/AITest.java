@@ -13,15 +13,16 @@ public class AITest {
 	private int draws = 0;
 
 	public void test() {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			DraughtsEngine draughtsEngine = new DraughtsEngine();
 			// draughtsEngine.setWhitePlayer(new SmartPlayer(2));
-            AIPlayer a = new SmartPlayer(1, "src/main/resources/winner.txt");
+            AIPlayer a = new SmartPlayer(5, "src/main/resources/winner.txt");
 			AIPlayer b = new RandomPlayer(0);
 			draughtsEngine.setWhitePlayer(a);
 			draughtsEngine.setBlackPlayer(b);
 			draughtsEngine.initializeGame();
 			GameResult result = draughtsEngine.testGame();
+			System.out.println(draughtsEngine.getChessboard());
 			if (result == GameResult.BLACK_WON) {
 				blackWonTimes++;
 			} else if (result == GameResult.WHITE_WON) {

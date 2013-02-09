@@ -34,11 +34,6 @@ public class Chessboard {
         return new Chessboard(this);
     }
 
-	public boolean doMove(Move move) {
-		boolean result = false;
-		return result;
-	}
-
 	private void initializeChessboard() {
 		for (int i = 0; i < INITIAL_PAWNS__ROWS_COUNT; i++) {
 			for (int j = i % 2; j < CHESSBOARD_SIZE; j += 2) {

@@ -48,6 +48,7 @@ public class DraughtsEngine extends Observable {
                 break;
             }
             move.doMove(chessboard);
+            //System.out.println(chessboard);
             if(chceckIfDrawConditions()) {
                 gameResult = GameResult.DRAW;
                 break;
@@ -58,6 +59,7 @@ public class DraughtsEngine extends Observable {
                 break;
             }
             move.doMove(chessboard);
+            //System.out.println(chessboard);
             if(chceckIfDrawConditions()) {
                 gameResult = GameResult.DRAW;
                 break;
