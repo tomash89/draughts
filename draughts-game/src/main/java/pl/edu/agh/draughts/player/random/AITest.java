@@ -1,6 +1,7 @@
 package pl.edu.agh.draughts.player.random;
 
 import pl.edu.agh.draughts.ai.AIPlayer;
+import pl.edu.agh.draughts.ai.OldSmartPlayer;
 import pl.edu.agh.draughts.ai.RandomPlayer;
 import pl.edu.agh.draughts.ai.SmartPlayer;
 import pl.edu.agh.draughts.game.DraughtsEngine;
@@ -13,13 +14,16 @@ public class AITest {
 	private int draws = 0;
 
 	public void test() {
-		for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
 			DraughtsEngine draughtsEngine = new DraughtsEngine();
 			// draughtsEngine.setWhitePlayer(new SmartPlayer(2));
-            AIPlayer a = new SmartPlayer(1);//, "src/main/resources/my_guess.txt");
-			AIPlayer b = new RandomPlayer(0);//new SmartPlayer(1);
-			draughtsEngine.setWhitePlayer(a);
-			draughtsEngine.setBlackPlayer(b);
+            AIPlayer a = new SmartPlayer(3, "src/main/resources/my_guess.txt");
+            AIPlayer a1 = new SmartPlayer(2, "src/main/resources/winner_d2.txt");
+            AIPlayer b = new SmartPlayer(1);// new SmartPlayer(1);
+            AIPlayer c = new RandomPlayer(0);
+            AIPlayer d = new OldSmartPlayer();
+            draughtsEngine.setWhitePlayer(a);
+            draughtsEngine.setBlackPlayer(b);
 			draughtsEngine.initializeGame();
 			GameResult result = draughtsEngine.testGame();
 			System.out.println(draughtsEngine.getChessboard());

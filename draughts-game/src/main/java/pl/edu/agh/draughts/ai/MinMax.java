@@ -47,8 +47,7 @@ public class MinMax {
     public double evaluatePosition(Chessboard chessboard, EvaluationFunction evaluationFunction) {
         try {
             double playerValue = evaluationFunction.calculateValue(chessboard, player);
-            double opponentValue = evaluationFunction.calculateValue(chessboard,
-                    player.getOpponentColor());
+            double opponentValue = evaluationFunction.calculateValue(chessboard, player.getOpponentColor());
             return playerValue - opponentValue;
         } catch (InvalidPieceException e) {
             e.printStackTrace();
