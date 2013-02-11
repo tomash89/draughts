@@ -28,9 +28,9 @@ public class EvolutionaryAlgorithm {
 
 	private static final int POPULATION_SIZE = 30;
 
-	private static final double MIN_INITIAL_VALUE = 0.0;
+	private static final double MIN_INITIAL_VALUE = -0.5;
 
-	private static final double MAX_INITIAL_VALUE = 1.0;
+	private static final double MAX_INITIAL_VALUE = 4.0;
 
 	private static final Random RANDOM = new Random();
 
@@ -44,7 +44,7 @@ public class EvolutionaryAlgorithm {
 
 	private static final boolean PRESERVE_WINNER = true;
 
-	private static final int PREDICTED_STEPS_COUNT = 5;
+	private static final int PREDICTED_STEPS_COUNT = 2;
 
 	private ICrossoverFunction crossoverFunction = new AvgCrossoverFunction();
 
