@@ -13,11 +13,11 @@ public class AITest {
 	private int draws = 0;
 
 	public void test() {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			DraughtsEngine draughtsEngine = new DraughtsEngine();
 			// draughtsEngine.setWhitePlayer(new SmartPlayer(2));
-            AIPlayer a = new SmartPlayer(5, "src/main/resources/winner.txt");
-			AIPlayer b = new RandomPlayer(0);
+            AIPlayer a = new SmartPlayer(1);//, "src/main/resources/my_guess.txt");
+			AIPlayer b = new RandomPlayer(0);//new SmartPlayer(1);
 			draughtsEngine.setWhitePlayer(a);
 			draughtsEngine.setBlackPlayer(b);
 			draughtsEngine.initializeGame();

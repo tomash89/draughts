@@ -1,0 +1,13 @@
+#Sat Feb 09 23:26:12 CET 2013
+pl.edu.agh.draughts.evaluation.parameters.PromotionLineDistanceParameter=0.5257129027716372
+pl.edu.agh.draughts.evaluation.parameters.SafeKingsNumberParameter=0.5711293043336405
+pl.edu.agh.draughts.evaluation.parameters.CentrallyPositionedKingsParameter=0.6180863108075411
+pl.edu.agh.draughts.evaluation.parameters.KingNumberParameter=0.500539247547866
+pl.edu.agh.draughts.evaluation.parameters.SafePawnsNumberParameter=0.5731982285137239
+pl.edu.agh.draughts.evaluation.parameters.CentrallyPositionedPawnsParameter=0.5296628646385666
+pl.edu.agh.draughts.evaluation.parameters.LonerKingsNumberParameter=0.7388371253064658
+pl.edu.agh.draughts.evaluation.parameters.AttackingPawnsNumberParameter=0.5072545100006661
+pl.edu.agh.draughts.evaluation.parameters.LonerPawnsNumberParameter=0.48270333890373635
+pl.edu.agh.draughts.evaluation.parameters.PromotionLineUnoccupiedFieldsParameter=0.47202978185740385
+pl.edu.agh.draughts.evaluation.parameters.PawnNumberParameter=0.6450051019749812
+pl.edu.agh.draughts.evaluation.parameters.DefenderPiecesNumberParameter=0.5318284236581129
